@@ -1,0 +1,102 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+<!-- 유용한 링크 -->
+<!-- cdnsj : https://cdnjs.com/ -->
+<!-- 폰트어썸 아이콘 리스트 : https://fontawesome.com/icons?d=gallery&m=free -->
+
+
+<link rel="stylesheet" href="/blog/resource/css/common.css">
+<link rel="stylesheet" href="/blog/resource/css/home/main.css">
+
+<!-- 구글 폰트 불러오기 -->
+<!-- rotobo(400/900), notosanskr(400/900) -->
+<link
+	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;900&family=Roboto:wght@400;900&display=swap"
+	rel="stylesheet">
+
+<!-- 폰트어썸 불러오기 -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css">
+
+<!-- 제이쿼리 불러오기 -->
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- 애니메이션 불러오기 -->
+<!-- https://animate.style/-->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css" />
+
+
+<script src="/blog/resource/js/common.js"></script>
+<script src="/blog/resource/js/home/main.js"></script>
+<title>블로그</title>
+</head>
+
+<body>
+
+	<header class="header visble-on-md-up">
+		<div class="flex flex-jc-c height-100p forTitle flex"
+			style="margin-bottom: 20px;">
+			<a class="title animate__animated animate__fadeInDown height-100p"
+				href="/blog/home/main"> <i class="fas fa-rocket border"></i>
+				기록하는 블로그
+			</a>
+		</div>
+		<div class="top-bar">
+			<div class="con flex flex-jc-c height-100p">
+
+				<nav class="menu-box-1">
+					<ul
+						class="flex height-100p forlist animate__animated animate__fadeInDown">
+						<li><a href="/blog/home/main" class="block height-100p"
+							style="text-align: center;"><i class="fas fa-home"></i><br />Home</a></li>
+						<li><a href="/blog/home/articles" class="block height-100p"
+							style="text-align: center;"><i class="fab fa-readme"></i><br />Articles</a></li>
+						<li><a href="/blog/home/aboutMe" class="block height-100p"
+							style="text-align: center;"><i class="fas fa-user"></i><br />AboutMe</a></li>
+						<li><a href="#" class="block height-100p"
+							style="text-align: center;"><i class="fas fa-share-alt"></i><br />SNS</a>
+							<ul>
+								<li><a href="https://github.com/rekrcs" target="_blank"
+									class="block">GITHUB</a></li>
+								<li><a href="https://github.com/rekrcs" target="_blank"
+									class="block">INSTA</a></li>
+							</ul></li>
+					</ul>
+				</nav>
+			</div>
+		</div>
+	</header>
+	<div class="mobile-top-bar visible-on-sm-down flex">
+		<a href="#" class="btn-toggle-mobile-side-bar flex flex-ai-c"> <i
+			class="fas fa-bars"></i> <i class="fas fa-times"></i>
+		</a> <a href="#"
+			class="logo absolute-center absolute-middle flex flex-ai-c"><i
+			class="fas fa-rocket border"></i></a>
+	</div>
+	<div class="mobile-side-bar flex flex-ai-c visible-on-sm-down">
+		<nav class="mobile-menu-box-1 flex-grow-1">
+			<ul>
+				<li><a href="/blog/home/main" class="block">Home</a></li>
+				<li><a href="/blog/home/articles" class="block">Articles</a></li>
+				<li><a href="/blog/home/aboutMe" class="block">AboutMe</a></li>
+				<li><a href="#" class="block">SNS</a>
+					<ul>
+						<li><a href="https://github.com/rekrcs" target="_blank"
+							class="block">GITHUB</a></li>
+						<li><a href="https://github.com/rekrcs" target="_blank"
+							class="block">INSTA</a></li>
+					</ul></li>
+			</ul>
+		</nav>
+	</div>
