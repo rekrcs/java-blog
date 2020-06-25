@@ -64,7 +64,7 @@
 							style="text-align: center;"><i class="fab fa-readme"></i><br />Articles</a></li>
 						<li><a href="${pageContext.request.contextPath}/home/aboutMe" class="block height-100p"
 							style="text-align: center;"><i class="fas fa-user"></i><br />AboutMe</a></li>
-						<li><a href="#" class="block height-100p"
+						<li><a href="${pageContext.request.contextPath}/home/sns" class="block height-100p"
 							style="text-align: center;"><i class="fas fa-share-alt"></i><br />SNS</a>
 							<ul>
 								<li><a href="https://github.com/rekrcs" target="_blank"
@@ -90,7 +90,7 @@
 				<li><a href="${pageContext.request.contextPath}/home/main" class="block">Home</a></li>
 				<li><a href="${pageContext.request.contextPath}/home/articles" class="block">Articles</a></li>
 				<li><a href="${pageContext.request.contextPath}/home/aboutMe" class="block">AboutMe</a></li>
-				<li><a href="#" class="block">SNS</a>
+				<li><a href="${pageContext.request.contextPath}/home/sns" class="block">SNS</a>
 					<ul>
 						<li><a href="https://github.com/rekrcs" target="_blank"
 							class="block">GITHUB</a></li>
