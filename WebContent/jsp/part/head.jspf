@@ -14,8 +14,8 @@
 <!-- 폰트어썸 아이콘 리스트 : https://fontawesome.com/icons?d=gallery&m=free -->
 
 
-<link rel="stylesheet" href="/blog/resource/css/common.css">
-<link rel="stylesheet" href="/blog/resource/css/home/main.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resource/css/common.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resource/css/home/main.css">
 
 <!-- 구글 폰트 불러오기 -->
 <!-- rotobo(400/900), notosanskr(400/900) -->
@@ -37,8 +37,8 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css" />
 
 
-<script src="/blog/resource/js/common.js"></script>
-<script src="/blog/resource/js/home/main.js"></script>
+<script src="${pageContext.request.contextPath}/resource/js/common.js"></script>
+<script src="${pageContext.request.contextPath}/resource/js/home/main.js"></script>
 <title>블로그</title>
 </head>
 
@@ -48,7 +48,7 @@
 		<div class="flex flex-jc-c height-100p forTitle flex"
 			style="margin-bottom: 20px;">
 			<a class="title animate__animated animate__fadeInDown height-100p"
-				href="/blog/home/main"> <i class="fas fa-rocket border"></i>
+				href="${pageContext.request.contextPath}/home/main"> <i class="fas fa-rocket border"></i>
 				기록하는 블로그
 			</a>
 		</div>
@@ -58,11 +58,11 @@
 				<nav class="menu-box-1">
 					<ul
 						class="flex height-100p forlist animate__animated animate__fadeInDown">
-						<li><a href="/blog/home/main" class="block height-100p"
+						<li><a href="${pageContext.request.contextPath}/home/main" class="block height-100p"
 							style="text-align: center;"><i class="fas fa-home"></i><br />Home</a></li>
-						<li><a href="/blog/home/articles" class="block height-100p"
+						<li><a href="${pageContext.request.contextPath}/home/articles" class="block height-100p"
 							style="text-align: center;"><i class="fab fa-readme"></i><br />Articles</a></li>
-						<li><a href="/blog/home/aboutMe" class="block height-100p"
+						<li><a href="${pageContext.request.contextPath}/home/aboutMe" class="block height-100p"
 							style="text-align: center;"><i class="fas fa-user"></i><br />AboutMe</a></li>
 						<li><a href="#" class="block height-100p"
 							style="text-align: center;"><i class="fas fa-share-alt"></i><br />SNS</a>
@@ -87,9 +87,9 @@
 	<div class="mobile-side-bar flex flex-ai-c visible-on-sm-down">
 		<nav class="mobile-menu-box-1 flex-grow-1">
 			<ul>
-				<li><a href="/blog/home/main" class="block">Home</a></li>
-				<li><a href="/blog/home/articles" class="block">Articles</a></li>
-				<li><a href="/blog/home/aboutMe" class="block">AboutMe</a></li>
+				<li><a href="${pageContext.request.contextPath}/home/main" class="block">Home</a></li>
+				<li><a href="${pageContext.request.contextPath}/home/articles" class="block">Articles</a></li>
+				<li><a href="${pageContext.request.contextPath}/home/aboutMe" class="block">AboutMe</a></li>
 				<li><a href="#" class="block">SNS</a>
 					<ul>
 						<li><a href="https://github.com/rekrcs" target="_blank"
