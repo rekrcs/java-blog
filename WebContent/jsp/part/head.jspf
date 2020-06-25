@@ -14,8 +14,10 @@
 <!-- 폰트어썸 아이콘 리스트 : https://fontawesome.com/icons?d=gallery&m=free -->
 
 
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resource/css/common.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resource/css/home/main.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resource/css/common.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resource/css/home/main.css">
 
 <!-- 구글 폰트 불러오기 -->
 <!-- rotobo(400/900), notosanskr(400/900) -->
@@ -38,34 +40,40 @@
 
 
 <script src="${pageContext.request.contextPath}/resource/js/common.js"></script>
-<script src="${pageContext.request.contextPath}/resource/js/home/main.js"></script>
+<script
+	src="${pageContext.request.contextPath}/resource/js/home/main.js"></script>
 <title>블로그</title>
 </head>
 
 <body>
 
-	<header class="header visble-on-md-up">
+	<header class="header">
 		<div class="flex flex-jc-c height-100p forTitle flex"
 			style="margin-bottom: 20px;">
 			<a class="title animate__animated animate__fadeInDown height-100p"
-				href="${pageContext.request.contextPath}/home/main"> <i class="fas fa-rocket border"></i>
-				기록하는 블로그
+				href="${pageContext.request.contextPath}/home/main"> <i
+				class="fas fa-rocket border"></i> 기록하는 블로그
 			</a>
 		</div>
 		<div class="top-bar">
-			<div class="con flex flex-jc-c height-100p">
+			<div class="con flex flex-jc-c height-100p visble-on-md-up">
 
 				<nav class="menu-box-1">
 					<ul
 						class="flex height-100p forlist animate__animated animate__fadeInDown">
-						<li><a href="${pageContext.request.contextPath}/home/main" class="block height-100p"
-							style="text-align: center;"><i class="fas fa-home"></i><br />Home</a></li>
-						<li><a href="${pageContext.request.contextPath}/home/articles" class="block height-100p"
-							style="text-align: center;"><i class="fab fa-readme"></i><br />Articles</a></li>
-						<li><a href="${pageContext.request.contextPath}/home/aboutMe" class="block height-100p"
-							style="text-align: center;"><i class="fas fa-user"></i><br />AboutMe</a></li>
-						<li><a href="${pageContext.request.contextPath}/home/sns" class="block height-100p"
-							style="text-align: center;"><i class="fas fa-share-alt"></i><br />SNS</a>
+						<li><a href="${pageContext.request.contextPath}/home/main"
+							class="block height-100p" style="text-align: center;"><i
+								class="fas fa-home"></i><br />Home</a></li>
+						<li><a
+							href="${pageContext.request.contextPath}/home/articles"
+							class="block height-100p" style="text-align: center;"><i
+								class="fab fa-readme"></i><br />Articles</a></li>
+						<li><a href="${pageContext.request.contextPath}/home/aboutMe"
+							class="block height-100p" style="text-align: center;"><i
+								class="fas fa-user"></i><br />AboutMe</a></li>
+						<li><a href="${pageContext.request.contextPath}/home/sns"
+							class="block height-100p" style="text-align: center;"><i
+								class="fas fa-share-alt"></i><br />SNS</a>
 							<ul>
 								<li><a href="https://github.com/rekrcs" target="_blank"
 									class="block">GITHUB</a></li>
@@ -77,20 +85,30 @@
 			</div>
 		</div>
 	</header>
-	<div class="mobile-top-bar visible-on-sm-down flex">
-		<a href="#" class="btn-toggle-mobile-side-bar flex flex-ai-c"> <i
-			class="fas fa-bars"></i> <i class="fas fa-times"></i>
+	<div class="mobile-top-bar visible-on-sm-down flex flex-ai-c">
+		<a href="#" class="btn-toggle-mobile-side-bar">
+			<div></div>
+			<div></div>
+			<div></div>
 		</a> <a href="#"
-			class="logo absolute-center absolute-middle flex flex-ai-c"><i
-			class="fas fa-rocket border"></i></a>
+			class="logo flex flex-ai-c absolute-center absolute-middle"> </a>
 	</div>
-	<div class="mobile-side-bar flex flex-ai-c visible-on-sm-down">
-		<nav class="mobile-menu-box-1 flex-grow-1">
+
+	<div class="mobile-side-bar visible-on-sm-down">
+		<nav class="menu-box-1 flex-grow-1">
 			<ul>
-				<li><a href="${pageContext.request.contextPath}/home/main" class="block">Home</a></li>
-				<li><a href="${pageContext.request.contextPath}/home/articles" class="block">Articles</a></li>
-				<li><a href="${pageContext.request.contextPath}/home/aboutMe" class="block">AboutMe</a></li>
-				<li><a href="${pageContext.request.contextPath}/home/sns" class="block">SNS</a>
+				<li><a href="${pageContext.request.contextPath}/home/main"
+					class="block"><i class="fas fa-home"></i> Home
+						<hr /></a></li>
+				<li><a href="${pageContext.request.contextPath}/home/articles"
+					class="block"><i class="fab fa-readme"></i> Articles
+						<hr /></a></li>
+				<li><a href="${pageContext.request.contextPath}/home/aboutMe"
+					class="block"><i class="fas fa-user"></i> About Me
+						<hr /></a></li>
+				<li><a href="${pageContext.request.contextPath}/home/sns"
+					class="block"><i class="fas fa-share-alt"></i> SNS
+						<hr /> </a>
 					<ul>
 						<li><a href="https://github.com/rekrcs" target="_blank"
 							class="block">GITHUB</a></li>
