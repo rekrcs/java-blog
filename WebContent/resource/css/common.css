@@ -500,7 +500,6 @@ label[for] {
 	visibility: hidden;
 	opacity: 0;
 	transition: visibility 1s, opacity 0.5s;
-
 }
 
 .mobile-side-bar .menu-box-1 {
