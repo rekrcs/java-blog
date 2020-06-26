@@ -51,7 +51,7 @@
 		<div class="flex flex-jc-c height-100p forTitle flex"
 			style="margin-bottom: 20px;">
 			<a class="title animate__animated animate__fadeInDown height-100p"
-				href="${pageContext.request.contextPath}/home/main"> <i
+				href="${pageContext.request.contextPath}/s/home/main"> <i
 				class="fas fa-rocket border"></i> 기록하는 블로그
 			</a>
 		</div>
@@ -61,17 +61,17 @@
 				<nav class="menu-box-1">
 					<ul
 						class="flex height-100p forlist animate__animated animate__fadeInDown">
-						<li><a href="${pageContext.request.contextPath}/home/main"
+						<li><a href="${pageContext.request.contextPath}/s/home/main"
 							class="block height-100p" style="text-align: center;"><i
 								class="fas fa-home"></i><br />Home</a></li>
 						<li><a
-							href="${pageContext.request.contextPath}/home/articles"
+							href="${pageContext.request.contextPath}/s/home/articles"
 							class="block height-100p" style="text-align: center;"><i
 								class="fab fa-readme"></i><br />Articles</a></li>
-						<li><a href="${pageContext.request.contextPath}/home/aboutMe"
+						<li><a href="${pageContext.request.contextPath}/s/home/aboutMe"
 							class="block height-100p" style="text-align: center;"><i
 								class="fas fa-user"></i><br />AboutMe</a></li>
-						<li><a href="${pageContext.request.contextPath}/home/sns"
+						<li><a href="${pageContext.request.contextPath}/s/home/sns"
 							class="block height-100p" style="text-align: center;"><i
 								class="fas fa-share-alt"></i><br />SNS</a>
 							<ul>
@@ -97,16 +97,16 @@
 	<div class="mobile-side-bar visible-on-sm-down">
 		<nav class="menu-box-1 flex-grow-1">
 			<ul>
-				<li><a href="${pageContext.request.contextPath}/home/main"
+				<li><a href="${pageContext.request.contextPath}/s/home/main"
 					class="block"><i class="fas fa-home"></i> Home
 						<hr /></a></li>
-				<li><a href="${pageContext.request.contextPath}/home/articles"
+				<li><a href="${pageContext.request.contextPath}/s/home/articles"
 					class="block"><i class="fab fa-readme"></i> Articles
 						<hr /></a></li>
-				<li><a href="${pageContext.request.contextPath}/home/aboutMe"
+				<li><a href="${pageContext.request.contextPath}/s/home/aboutMe"
 					class="block"><i class="fas fa-user"></i> About Me
 						<hr /></a></li>
-				<li><a href="${pageContext.request.contextPath}/home/sns"
+				<li><a href="${pageContext.request.contextPath}/s/home/sns"
 					class="block"><i class="fas fa-share-alt"></i> SNS
 						<hr /> </a>
 					<ul>
