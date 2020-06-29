@@ -78,7 +78,11 @@
 	transform: scaleX(1);
 }
 
-.body-content {
+/* .body-content {
+	margin: 0 auto;
+	width: 700px;
+} */
+.list-body>.list-body2-box {
 	margin: 0 auto;
 	width: 700px;
 }
@@ -125,7 +129,13 @@
 }
 
 .list-detail-btn {
+	display: inline-block;
 	margin-top: 50px;
+	text-align: center;
+	margin-top: 50px;
+}
+
+.list-body>.btn-box {
 	text-align: center;
 }
 
@@ -150,6 +160,10 @@ footer>.list-footer {
 	height: 1px;
 	text-align: center;
 	background: #ccc;
+}
+
+.list-info>.list-updateDate>span>.boardName:hover {
+	text-decoration: underline;
 }
 
 /* 리스트 바디 끝*/
@@ -222,7 +236,7 @@ footer>.list-footer {
 						<hr /></a></li>
 				<li><a href="${pageContext.request.contextPath}/s/home/sns"
 					class="block"><i class="fas fa-share-alt"></i> SNS
-						<hr /> </a>
+						<hr /></a>
 					<ul>
 						<li><a href="https://github.com/rekrcs" target="_blank"
 							class="block">GITHUB</a></li>

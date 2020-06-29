@@ -23,19 +23,24 @@
 					</span> <span class="list-text"> 작성일 </span> <span> <%=article.getRegDate()%>
 					</span>
 					</span> <span class="list-updateDate"> <span class="list-bar">|</span>
-						<span class="list-icon"><i class="far fa-edit"></i></span> <span
-						class="list-text"> 수정일 </span> <span> <%=article.getUpdateDate()%>
+						<span class="list-icon"><i class="far fa-folder-open"></i></span>
+						<span class="list-text"> 게시판 </span> <span> <a
+							class="boardName" href="#">공지사항</a>
 					</span>
 					</span>
 				</div>
 			</header>
 			<div class="list-body">
-				<h3>미리보기 or 소재목</h3>
-				<ul>
-					<li>링크 혹은 참조</li>
-				</ul>
-				<div class="list-detail-btn">
-					<a href="" class="btn">자세히»</a>
+				<div class="list-body2-box">
+					<h3>미리보기 or 소재목</h3>
+					<ul>
+						<li>링크 혹은 참조</li>
+					</ul>
+				</div>
+				<div class="btn-box">
+					<div class="list-detail-btn">
+						<a href="" class="btn">자세히»</a>
+					</div>
 				</div>
 			</div>
 			<footer>
