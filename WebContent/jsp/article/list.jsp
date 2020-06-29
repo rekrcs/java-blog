@@ -39,7 +39,8 @@
 				</div>
 				<div class="btn-box">
 					<div class="list-detail-btn">
-						<a href="" class="btn">자세히»</a>
+						<a href="${pageContext.request.contextPath}/s/article/detail?id=<%=article.getId()%>"
+							+ <%=article.getId()%> class="btn">자세히»</a>
 					</div>
 				</div>
 			</div>
