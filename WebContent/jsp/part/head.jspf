@@ -50,6 +50,12 @@
 	-moz-box-sizing: border-box;
 }
 
+hr {
+	margin-top: 5px;
+	background-color: black;
+	height: 1px;
+}
+
 * {
 	margin: 0;
 	padding: 0;
@@ -226,17 +232,17 @@ footer>.list-footer {
 			<ul>
 				<li><a href="${pageContext.request.contextPath}/s/home/main"
 					class="block"><i class="fas fa-home"></i> Home
-						<hr /></a></li>
+						<hr></hr></a></li>
 				<li><a
 					href="${pageContext.request.contextPath}/s/home/articles"
 					class="block"><i class="fab fa-readme"></i> Articles
-						<hr /></a></li>
+						<hr></hr></a></li>
 				<li><a href="${pageContext.request.contextPath}/s/home/aboutMe"
 					class="block"><i class="fas fa-user"></i> About Me
-						<hr /></a></li>
+						<hr></hr></a></li>
 				<li><a href="${pageContext.request.contextPath}/s/home/sns"
 					class="block"><i class="fas fa-share-alt"></i> SNS
-						<hr /></a>
+						<hr></hr></a>
 					<ul>
 						<li><a href="https://github.com/rekrcs" target="_blank"
 							class="block">GITHUB</a></li>
