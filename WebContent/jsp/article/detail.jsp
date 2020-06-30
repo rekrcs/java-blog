@@ -5,6 +5,7 @@
 <%@ include file="/jsp/part/head.jspf"%>
 <%
 	Article article = (Article) request.getAttribute("article");
+	Article articleNext = (Article) request.getAttribute("articleNext");
 %>
 <style>
 #viewer1 {
