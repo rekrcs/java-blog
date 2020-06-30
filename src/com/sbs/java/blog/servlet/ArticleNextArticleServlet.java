@@ -6,10 +6,6 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,9 +15,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.sbs.java.blog.dto.Article;
 
-@WebServlet("/s/article/list")
-public class ArticleListServlet extends HttpServlet {
-
+@WebServlet("/s/article/nextArticle")
+public class ArticleNextArticleServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		response.setContentType("text/html; charset=UTF-8");
@@ -30,14 +25,18 @@ public class ArticleListServlet extends HttpServlet {
 		String password = "";
 		String driverName = "com.mysql.cj.jdbc.Driver";
 
-		String sql = "";
-
-		List<Article> articles = new ArrayList<>();
-
-		sql += String.format("SELECT * ");
-		sql += String.format("FROM article ");
-		sql += String.format("ORDER BY id DESC ");
-
+		String sql2 = "";
+		int id = Integer.parseInt(request.getParameter("id"));
+		
+		Article articleNext = new Article();
+		
+		System.out.println("id : " + id);
+		sql2 += String.format("SELECT * ");
+		sql2 += String.format("FROM article ");
+		sql2 += String.format("WHERE id > %d", id);
+		sql2 += String.format(" ORDER BY id ASC");
+		sql2 += String.format(" LIMIT 1");
+		
 		Connection connection = null;
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -46,20 +45,18 @@ public class ArticleListServlet extends HttpServlet {
 			Class.forName(driverName);
 			connection = DriverManager.getConnection(url, user, password);
 			stmt = connection.createStatement();
-			rs = stmt.executeQuery(sql);
+			rs = stmt.executeQuery(sql2);
 
-			while (rs.next()) {
-				Article article = new Article();
-				article.setId(rs.getInt("id"));
-				article.setRegDate(rs.getString("regDate"));
-				article.setUpdateDate(rs.getString("updateDate"));
-				article.setTitle(rs.getString("title"));
-				article.setBody(rs.getString("body"));
-
-				articles.add(article);
+			if (rs.next()) {
+				articleNext.setId(rs.getInt("id"));
+				articleNext.setRegDate(rs.getString("regDate"));
+				articleNext.setUpdateDate(rs.getString("updateDate"));
+				articleNext.setTitle(rs.getString("title"));
+				articleNext.setBody(rs.getString("body"));
 			}
-			request.setAttribute("articles", articles);
-			request.getRequestDispatcher("/jsp/article/list.jsp").forward(request, response);
+			
+			request.setAttribute("articleNext", articleNext);
+			request.getRequestDispatcher("/jsp/article/detail.jsp").forward(request, response);
 
 		} catch (ClassNotFoundException e) {
 			System.err.printf("[드라이버 클래스 로딩 예외] : %s\n", e.getMessage());
@@ -95,5 +92,4 @@ public class ArticleListServlet extends HttpServlet {
 			throws ServletException, IOException {
 		doGet(request, response);
 	}
-
 }

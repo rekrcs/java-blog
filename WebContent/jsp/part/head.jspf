@@ -233,7 +233,7 @@ footer>.list-footer {
 				<nav class="menu-box-1">
 					<ul
 						class="flex height-100p forlist animate__animated animate__fadeInDown">
-						<li><a href="${pageContext.request.contextPath}/s/home/main"
+						<li><a href="${pageContext.request.contextPath}/s/article/list"
 							class="block height-100p" style="text-align: center;"><i
 								class="fas fa-home"></i><br />Home</a></li>
 						<li><a
@@ -270,7 +270,7 @@ footer>.list-footer {
 	<div class="mobile-side-bar visible-on-sm-down">
 		<nav class="menu-box-1 flex-grow-1">
 			<ul>
-				<li><a href="${pageContext.request.contextPath}/s/home/main"
+				<li><a href="${pageContext.request.contextPath}/s/aritcle/list"
 					class="block"><i class="fas fa-home"></i> Home
 						<hr></hr></a></li>
 				<li><a
