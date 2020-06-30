@@ -15,7 +15,7 @@
 		<article>
 			<header>
 				<h1 class="list-title">
-					<a class="title-underline" href=""><%=article.getTitle()%></a>
+					<a class="title-underline" href="${pageContext.request.contextPath}/s/article/detail?id=<%=article.getId()%>"><%=article.getTitle()%></a>
 				</h1>
 				<div class="list-info">
 					<span class="list-regDate"> <span class="list-icon">
