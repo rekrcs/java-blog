@@ -11,6 +11,11 @@ public class Dto {
 		this.regDate = getRegDate();
 	}
 
+	public Dto(Map<String, Object> row) {
+		this.id = (int) row.get("id");
+		this.regDate = (String) row.get("regDate");
+	}
+
 	public int getId() {
 		return id;
 	}
