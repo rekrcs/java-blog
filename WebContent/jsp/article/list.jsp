@@ -15,7 +15,8 @@
 		<article>
 			<header>
 				<h1 class="list-title">
-					<a class="title-underline" href="${pageContext.request.contextPath}/s/article/detail?id=<%=article.getId()%>"><%=article.getTitle()%></a>
+					<a class="title-underline"
+						href="${pageContext.request.contextPath}/s/article/detail?id=<%=article.getId()%>"><%=article.getTitle()%></a>
 				</h1>
 				<div class="list-info">
 					<span class="list-regDate"> <span class="list-icon">
@@ -39,7 +40,8 @@
 				</div>
 				<div class="btn-box">
 					<div class="list-detail-btn">
-						<a href="${pageContext.request.contextPath}/s/article/detail?id=<%=article.getId()%>"
+						<a
+							href="${pageContext.request.contextPath}/s/article/detail?id=<%=article.getId()%>"
 							+ <%=article.getId()%> class="btn">자세히»</a>
 					</div>
 				</div>
@@ -52,6 +54,14 @@
 			}
 		%>
 
+		<div class="page-number-box">
+			<span class="page-number-box"> <%
+ 	for (int i = 1; i < ; i++) {
+ %> <a href="">[<%=i %>]</a><%
+ 	}
+ %>
+			</span>
+		</div>
 	</section>
 </div>
 <%@ include file="/jsp/part/foot.jspf"%>

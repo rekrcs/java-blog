@@ -5,7 +5,6 @@
 <%@ include file="/jsp/part/head.jspf"%>
 <%
 	Article article = (Article) request.getAttribute("article");
-	Article articleNext = (Article) request.getAttribute("articleNext");
 %>
 <style>
 #viewer1 {
@@ -51,7 +50,7 @@
 </div>
 <div id="viewer1"></div>
 <div class="previous-next-box">
-	<span class="previous-btn"><a href=""></a><i class="fas fa-angle-left"></i> 이전</span>
-	<span class="next-btn"><a href="">다음 <i class="fas fa-angle-right"></i></a></span>
+	<span class="previous-btn"><a href="${pageContext.request.contextPath}/s/article/previousArticle?id=<%=article.getId()%>"><i class="fas fa-angle-left"></i> 이전</a></span>
+	<span class="next-btn"><a href="${pageContext.request.contextPath}/s/article/nextArticle?id=<%=article.getId()%>">다음 <i class="fas fa-angle-right"></i></a></span>
 </div>
 <div class="forMargin"></div>
