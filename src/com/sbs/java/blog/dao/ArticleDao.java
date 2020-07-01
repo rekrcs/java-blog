@@ -15,14 +15,20 @@ public class ArticleDao {
 		this.dbConnection = dbConnection;
 	}
 
-	public List<Article> getForPrintListArticles() {
+	public List<Article> getForPrintListArticles(int page, int cateItemId) {
 		String sql = "";
 
+		int itemsInAPage = 10;
+		int limitFrom = (page - 1) * itemsInAPage;
+
 		sql += String.format("SELECT * ");
-		sql += String.format("FROM article  ");
-		sql += String.format("WHERE displayStatus = 1  ");
+		sql += String.format("FROM article ");
+		sql += String.format("WHERE displayStatus = 1 ");
+		if (cateItemId != 0) {
+			sql += String.format("AND cateItemId = %d ", cateItemId);
+		}
 		sql += String.format("ORDER BY id DESC ");
-		sql += String.format("LIMIT 0, 5 ");
+		sql += String.format("LIMIT %d, %d ", limitFrom, itemsInAPage);
 
 		List<Map<String, Object>> rows = DBUtil.selectRows(dbConnection, sql);
 		List<Article> articles = new ArrayList<>();
