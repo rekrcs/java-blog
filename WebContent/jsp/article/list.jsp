@@ -56,7 +56,7 @@
 
 		<div class="page-number-box">
 			<span class="page-number-box"> <%
- 	for (int i = 1; i < ; i++) {
+ 	for (int i = 1; i < articles.size(); i++) {
  %> <a href="">[<%=i %>]</a><%
  	}
  %>
