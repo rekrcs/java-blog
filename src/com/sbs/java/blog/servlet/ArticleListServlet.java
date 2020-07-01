@@ -25,9 +25,9 @@ public class ArticleListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		response.setContentType("text/html; charset=UTF-8");
-		String url = "jdbc:mysql://localhost:3306/blog?serverTimezone=Asia/Seoul&useOldAliasMetadataBehavior=true";
-		String user = "root";
-		String password = "";
+		String url = "jdbc:mysql://site33.iu.gy:3306/site33?serverTimezone=Asia/Seoul&useOldAliasMetadataBehavior=true";
+		String user = "site33";
+		String password = "sbs123414";
 		String driverName = "com.mysql.cj.jdbc.Driver";
 
 		String sql = "";
@@ -36,8 +36,14 @@ public class ArticleListServlet extends HttpServlet {
 
 		sql += String.format("SELECT * ");
 		sql += String.format("FROM article ");
-		sql += String.format("ORDER BY id DESC ");
-
+		if (request.getParameter("cateItemId") != null) {
+			sql += String.format(" WHERE displayStatus = 1");
+			sql += String.format(" AND cateItemId = %d", Integer.parseInt(request.getParameter("cateItemId")));
+			sql += String.format(" ORDER BY id DESC ");
+			sql += String.format(" LIMIT %d, %d", 5 * (Integer.parseInt(request.getParameter("page")) - 1), 5);
+		} else {
+			sql += String.format("ORDER BY id DESC ");
+		}
 		Connection connection = null;
 		Statement stmt = null;
 		ResultSet rs = null;
