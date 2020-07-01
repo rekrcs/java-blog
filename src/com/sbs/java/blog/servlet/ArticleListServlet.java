@@ -36,14 +36,12 @@ public class ArticleListServlet extends HttpServlet {
 
 		sql += String.format("SELECT * ");
 		sql += String.format("FROM article ");
+		sql += String.format(" WHERE displayStatus = 1");
 		if (request.getParameter("cateItemId") != null) {
-			sql += String.format(" WHERE displayStatus = 1");
 			sql += String.format(" AND cateItemId = %d", Integer.parseInt(request.getParameter("cateItemId")));
-			sql += String.format(" ORDER BY id DESC ");
-			sql += String.format(" LIMIT %d, %d", 5 * (Integer.parseInt(request.getParameter("page")) - 1), 5);
-		} else {
-			sql += String.format("ORDER BY id DESC ");
 		}
+		sql += String.format(" ORDER BY id DESC ");
+		sql += String.format(" LIMIT %d, %d", 5 * (Integer.parseInt(request.getParameter("page")) - 1), 5);
 		Connection connection = null;
 		Statement stmt = null;
 		ResultSet rs = null;
