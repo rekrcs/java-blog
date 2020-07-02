@@ -34,12 +34,12 @@ public class ArticleController extends Controller {
 		if (request.getParameter("cateItemId") != null) {
 			cateItemId = Integer.parseInt(request.getParameter("cateItemId"));
 		}
-
+		
 		int page = 1;
 		if (request.getParameter("page") != null) {
 			page = Integer.parseInt(request.getParameter("page"));
 		}
-		List<Article> articles = articleService.getForPrintListArticles(page, cateItemId);
+		List<Article> articles = articleService.getForPrintListArticles(page, cateItemId, request, response);
 		request.setAttribute("articles", articles);
 		return "article/list";
 	}

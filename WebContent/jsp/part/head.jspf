@@ -213,6 +213,22 @@ footer>.list-footer {
 }
 
 /* 리스트 바디 끝*/
+
+/*페이징 번호 시작*/
+.page-number-box {
+	margin: 50px 0 40px;
+	text-align: center;
+}
+
+.page-number-box>.page-number>a {
+	margin: 0 5px;
+	font-size: 20px;
+	padding:0;
+}
+.page-number-box>.page-number>a:hover {
+	background-color:#afafaf;
+}
+
 </style>
 <title>블로그</title>
 </head>
@@ -233,7 +249,8 @@ footer>.list-footer {
 				<nav class="menu-box-1">
 					<ul
 						class="flex height-100p forlist animate__animated animate__fadeInDown">
-						<li><a href="${pageContext.request.contextPath}/s/article/list?page=1"
+						<li><a
+							href="${pageContext.request.contextPath}/s/article/list?page=1"
 							class="block height-100p" style="text-align: center;"><i
 								class="fas fa-home"></i><br />Home</a></li>
 						<li><a
@@ -270,7 +287,8 @@ footer>.list-footer {
 	<div class="mobile-side-bar visible-on-sm-down">
 		<nav class="menu-box-1 flex-grow-1">
 			<ul>
-				<li><a href="${pageContext.request.contextPath}/s/article/list?page=1"
+				<li><a
+					href="${pageContext.request.contextPath}/s/article/list?page=1"
 					class="block"><i class="fas fa-home"></i> Home
 						<hr></hr></a></li>
 				<li><a

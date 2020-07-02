@@ -34,9 +34,9 @@ public class DispatcherServlet extends HttpServlet {
 		// DB 커넥터 로딩 성공
 
 		// DB 접속 시작
-		String url = "jdbc:mysql://localhost:3306/blog?serverTimezone=Asia/Seoul&useOldAliasMetadataBehavior=true";
-		String user = "root";
-		String password = "";
+		String url = "jdbc:mysql://site33.iu.gy:3306/site33?serverTimezone=Asia/Seoul&useOldAliasMetadataBehavior=true";
+		String user = "site33";
+		String password = "sbs123414";
 
 		Connection dbConnection = null;
 

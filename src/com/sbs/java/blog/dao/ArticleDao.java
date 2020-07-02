@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import com.sbs.java.blog.dto.Article;
 import com.sbs.java.blog.util.DBUtil;
 
@@ -15,12 +18,13 @@ public class ArticleDao {
 		this.dbConnection = dbConnection;
 	}
 
-	public List<Article> getForPrintListArticles(int page, int cateItemId) {
+	public List<Article> getForPrintListArticles(int page, int cateItemId, HttpServletRequest request,
+			HttpServletResponse response) {
 		String sql = "";
 
-		int itemsInAPage = 10;
+		int itemsInAPage = 5;
 		int limitFrom = (page - 1) * itemsInAPage;
-
+		int totalPage;
 		sql += String.format("SELECT * ");
 		sql += String.format("FROM article ");
 		sql += String.format("WHERE displayStatus = 1 ");
@@ -30,6 +34,17 @@ public class ArticleDao {
 		sql += String.format("ORDER BY id DESC ");
 		sql += String.format("LIMIT %d, %d ", limitFrom, itemsInAPage);
 
+		String sql2 = "";
+
+		sql2 += String.format("SELECT COUNT(*)");
+		sql2 += String.format(" FROM article");
+		if (cateItemId != 0) {
+			sql2 += String.format(" WHERE cateItemId = %d", cateItemId);
+		}
+		int totalCount = DBUtil.getTotalCount(dbConnection, sql2);
+		totalPage = (int) Math.ceil((double) totalCount / itemsInAPage);
+		request.setAttribute("totalPage", totalPage);
+		request.setAttribute("cateItemId", cateItemId);
 		List<Map<String, Object>> rows = DBUtil.selectRows(dbConnection, sql);
 		List<Article> articles = new ArrayList<>();
 
@@ -37,6 +52,7 @@ public class ArticleDao {
 			articles.add(new Article(row));
 		}
 		return articles;
+
 	}
 
 }

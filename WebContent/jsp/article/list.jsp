@@ -7,6 +7,13 @@
 	List<Article> articles = (List<Article>) request.getAttribute("articles");
 %>
 
+<%
+	int totalPage = (int) request.getAttribute("totalPage");
+%>
+<%
+	int cateItemId = (int) request.getAttribute("cateItemId");
+%>
+
 <div class="body-content">
 	<section class="body-section">
 		<%
@@ -55,12 +62,12 @@
 		%>
 
 		<div class="page-number-box">
-			<span class="page-number-box"> <%
- 	for (int i = 1; i < articles.size(); i++) {
- %> <a href="">[<%=i %>]</a><%
- 	}
- %>
-			</span>
+			<span class="page-number"> <%for (int i = 1; i <= totalPage; i++) {%>
+						<%if(cateItemId == 0) {%> 
+			<a href="${pageContext.request.contextPath}/s/article/list?page=<%=i%>">[<%=i%>]</a><%}%>	
+				<%if(cateItemId != 0) { %>
+			<a href="${pageContext.request.contextPath}/s/article/list?cateItemId=${param.cateItemId}&page=<%=i%>">[<%=i%>]</a><%}%>
+			<%}%></span>
 		</div>
 	</section>
 </div>

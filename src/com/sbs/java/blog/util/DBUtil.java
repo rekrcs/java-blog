@@ -71,4 +71,40 @@ public class DBUtil {
 
 		return rows;
 	}
+
+	public static int getTotalCount(Connection connection, String sql) {
+		Statement stmt = null;
+		ResultSet rs = null;
+		int totalCount = -1;
+		try {
+			stmt = connection.createStatement();
+			rs = stmt.executeQuery(sql);
+			if (rs.next()) {
+				totalCount = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			System.err.println("[SQLException 예외]");
+			System.err.println("msg : " + e.getMessage());
+		} finally {
+			if (stmt != null) {
+				try {
+					stmt.close();
+				} catch (SQLException e) {
+					System.err.println("[SQLException 예외]");
+					System.err.println("msg : " + e.getMessage());
+				}
+			}
+
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					System.err.println("[SQLException 예외]");
+					System.err.println("msg : " + e.getMessage());
+				}
+			}
+		}
+
+		return totalCount;
+	}
 }
