@@ -1,5 +1,6 @@
 package com.sbs.java.blog.util;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -11,6 +12,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletResponse;
 
 import com.sbs.java.blog.dto.Article;
 
@@ -121,12 +124,18 @@ public class DBUtil {
 		return rows.get(0);
 	}
 
-	public static void insert(Connection connection, String sql) {
+	public static void insert(Connection connection, String sql, HttpServletResponse response) {
 		Statement stmt = null;
 
 		try {
 			stmt = connection.createStatement();
 			stmt.executeUpdate(sql);
+			int affectedRows = stmt.executeUpdate(sql);
+			try {
+				response.getWriter().append(affectedRows + "개의 데이터가 추가되었습니다.");
+			} catch (IOException e) {
+				System.err.printf("[게시물추가 에러] : %s\n", e.getMessage());
+			}
 
 		} catch (SQLException e) {
 			System.err.printf("[SQL 예외] : %s\n", e.getMessage());

@@ -63,12 +63,16 @@ public class DispatcherServlet extends HttpServlet {
 			}
 			if (controllerName != null) {
 				String viewPath = controller.doAction(actionMethodName, request, response);
-				
-				if(viewPath.equals("")) {
-					response.getWriter().append("ERROR, 응답없음");
+
+				if (viewPath.equals("insert")) {
+
+				} else {
+					if (viewPath.equals("")) {
+						response.getWriter().append("ERROR, 응답없음");
+					}
+					viewPath = "/jsp/" + viewPath + ".jsp";
+					request.getRequestDispatcher(viewPath).forward(request, response);
 				}
-				viewPath = "/jsp/" + viewPath + ".jsp";
-				request.getRequestDispatcher(viewPath).forward(request, response);
 			} else {
 				response.getWriter().append("존재 하지 않는 게시물 입니다.");
 			}

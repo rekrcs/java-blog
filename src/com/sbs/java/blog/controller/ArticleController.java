@@ -35,10 +35,10 @@ public class ArticleController extends Controller {
 	private String doActionDoWrite(HttpServletRequest request, HttpServletResponse response) {
 		String title = request.getParameter("title");
 		String body = request.getParameter("body");
-		String cateItemId = request.getParameter("cateItemId");
+		int cateItemId = Integer.parseInt(request.getParameter("cateItemId"));
 
 		articleService.doWriteArticle(title, body, cateItemId, request, response);
-		return "article/doWrite";
+		return "insert";
 	}
 
 	private String doActionDetail(HttpServletRequest request, HttpServletResponse response) {

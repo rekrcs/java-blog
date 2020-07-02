@@ -68,7 +68,7 @@ public class ArticleDao {
 		return article;
 	}
 
-	public void doWriteArticle(String title, String body, String cateItemId, HttpServletRequest request, HttpServletResponse response) {
+	public void doWriteArticle(String title, String body, int cateItemId, HttpServletRequest request, HttpServletResponse response) {
 		String sql = "";
 		sql += String.format("INSERT INTO article ");
 		sql += String.format("SET regDate = NOW()");
@@ -77,7 +77,7 @@ public class ArticleDao {
 		sql += String.format(", title = '%s'", title);
 		sql += String.format(", body = '%s'", body);
 		
-		DBUtil.insert(dbConnection, sql);
+		DBUtil.insert(dbConnection, sql, response);
 		
 	}
 
