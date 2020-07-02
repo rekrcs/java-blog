@@ -7,6 +7,9 @@
 <%
 	List<Article> articles = (List<Article>) request.getAttribute("articles");
 %>
+<%
+	List<Article> articles2 = (List<Article>) request.getAttribute("articles2");
+%>
 
 <%
 	int totalPage = (int) request.getAttribute("totalPage");
@@ -19,7 +22,16 @@
 <div class="body-content">
 	<section class="body-section">
 		<%
+		String cateName = null;
+		int cateNum = 0;
 			for (Article article : articles) {
+			for (Article article2 : articles2) {
+				if(article.getId() == article2.getId()) {
+					cateName = article2.getCateItemName();
+					cateNum = article2.getCateItemId();
+					break;
+				}
+			}
 		%>
 		<article>
 			<header>
@@ -35,7 +47,7 @@
 					</span> <span class="list-updateDate"> <span class="list-bar">|</span>
 						<span class="list-icon"><i class="far fa-folder-open"></i></span>
 						<span class="list-text"> 카테고리 </span> <span> <a
-							class="boardName" href="#">카테고리</a>
+							class="boardName" href="${pageContext.request.contextPath}/s/article/list?page=1&cateItemId=<%=cateNum%>"><%=cateName%></a>
 					</span>
 					</span>
 				</div>

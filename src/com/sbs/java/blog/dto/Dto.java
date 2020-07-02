@@ -5,6 +5,7 @@ import java.util.Map;
 public class Dto {
 	private int id;
 	private String regDate;
+	private Map<String, Object> extra;
 
 	public Dto() {
 		this.id = getId();
@@ -31,4 +32,13 @@ public class Dto {
 	public void setRegDate(String regDate) {
 		this.regDate = regDate;
 	}
+
+	public Map<String, Object> getExtra() {
+		return extra;
+	}
+
+	public void setExtra(Map<String, Object> extra) {
+		this.extra = extra;
+	}
+
 }

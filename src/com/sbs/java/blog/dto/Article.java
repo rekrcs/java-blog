@@ -7,6 +7,7 @@ public class Article extends Dto {
 	private String updateDate;
 	private String title;
 	private String body;
+	private String cateItemName;
 
 	public Article() {
 		super();
@@ -22,6 +23,7 @@ public class Article extends Dto {
 		this.title = (String) row.get("title");
 		this.body = (String) row.get("body");
 		this.cateItemId = (int) row.get("cateItemId");
+		this.cateItemName = (String) row.get("cateItemName");
 	}
 
 	public int getCateItemId() {
@@ -54,6 +56,14 @@ public class Article extends Dto {
 
 	public void setBody(String body) {
 		this.body = body;
+	}
+
+	public String getCateItemName() {
+		return cateItemName;
+	}
+
+	public void setCateItemName(String cateItemName) {
+		this.cateItemName = cateItemName;
 	}
 
 	@Override

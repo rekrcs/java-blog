@@ -51,6 +51,21 @@ public class ArticleDao {
 		for (Map<String, Object> row : rows) {
 			articles.add(new Article(row));
 		}
+		
+		String sql5 = "";
+		sql5 += String.format("SELECT A.*, C.name AS cateItemName ");
+		sql5 += String.format("FROM article AS A ");
+		sql5 += String.format("INNER JOIN cateItem AS C ");
+		sql5 += String.format("ON A.cateItemId = C.id ");
+		
+		List<Map<String, Object>> rows2 = DBUtil.selectRows(dbConnection, sql5);
+		List<Article> articles2 = new ArrayList<>();
+		
+		for (Map<String, Object> row1 : rows2) {
+			articles2.add(new Article(row1));
+		}
+		
+		request.setAttribute("articles2", articles2);
 		return articles;
 
 	}
@@ -117,6 +132,23 @@ public class ArticleDao {
 
 		request.setAttribute("articleNext", articleNext);
 		request.setAttribute("articlePrevious", articlePrevious);
+		
+		
+		
+		String sql5 = "";
+		sql5 += String.format("SELECT A.*, C.name AS cateItemName ");
+		sql5 += String.format("FROM article AS A ");
+		sql5 += String.format("INNER JOIN cateItem AS C ");
+		sql5 += String.format("ON A.cateItemId = C.id ");
+		
+		List<Map<String, Object>> rows2 = DBUtil.selectRows(dbConnection, sql5);
+		List<Article> articles2 = new ArrayList<>();
+		
+		for (Map<String, Object> row1 : rows2) {
+			articles2.add(new Article(row1));
+		}
+		
+		request.setAttribute("articles2", articles2);
 		return article;
 	}
 
