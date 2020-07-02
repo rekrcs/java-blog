@@ -11,6 +11,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.sbs.java.blog.dto.Article;
+
 public class DBUtil {
 
 	public static List<Map<String, Object>> selectRows(Connection connection, String sql) {
@@ -106,5 +108,15 @@ public class DBUtil {
 		}
 
 		return totalCount;
+	}
+
+	public static Map<String, Object> selectRow(Connection connection, String sql) {
+		List<Map<String, Object>> rows = selectRows(connection, sql);
+
+		if (rows.size() == 0) {
+			return new HashMap<String, Object>();
+		}
+
+		return rows.get(0);
 	}
 }

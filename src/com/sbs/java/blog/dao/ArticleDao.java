@@ -55,4 +55,17 @@ public class ArticleDao {
 
 	}
 
+	public Article getForDetailFromArticle(int id, HttpServletRequest request, HttpServletResponse response) {
+		String sql = "";
+
+		sql += String.format("SELECT * ");
+		sql += String.format("FROM article ");
+		sql += String.format("WHERE id = %d", id);
+		
+		Map<String, Object> row = DBUtil.selectRow(dbConnection, sql);
+		
+		Article article = new Article(row);
+		return article;
+	}
+
 }

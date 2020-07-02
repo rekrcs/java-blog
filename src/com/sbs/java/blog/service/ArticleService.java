@@ -21,4 +21,8 @@ public class ArticleService {
 		return articleDao.getForPrintListArticles(page, cateItemId, request, response);
 	}
 
+	public Article getForDetailFromArticle(int id, HttpServletRequest request, HttpServletResponse response) {
+		return articleDao.getForDetailFromArticle(id, request, response);
+	}
+
 }

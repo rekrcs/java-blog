@@ -23,10 +23,18 @@ public class ArticleController extends Controller {
 		switch (actionMethodName) {
 		case "list":
 			return doActionList(request, response);
-
+		case "detail":
+		return doActionDetail(request, response);
 		}
 		return "";
 
+	}
+
+	private String doActionDetail(HttpServletRequest request, HttpServletResponse response) {
+		int id = Integer.parseInt(request.getParameter("id"));
+		Article article = articleService.getForDetailFromArticle(id, request, response);
+		request.setAttribute("article", article);
+		return "article/detail";
 	}
 
 	private String doActionList(HttpServletRequest request, HttpServletResponse response) {
