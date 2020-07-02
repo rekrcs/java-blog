@@ -1,3 +1,4 @@
+<%@ page import="com.sbs.java.blog.dto.CateItem"%>
 <%@ page import="java.util.List"%>
 <%@ page import="com.sbs.java.blog.dto.Article"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -17,6 +18,9 @@
 %>
 <%
 	int lastId = (int) request.getAttribute("lastId");
+%>
+<%
+	List<CateItem> cateItems = (List<CateItem>) request.getAttribute("cateItems");
 %>
 <style>
 #viewer1 {
@@ -47,8 +51,8 @@
 					</span>
 					</span> <span class="list-updateDate"> <span class="list-bar">|</span>
 						<span class="list-icon"><i class="far fa-folder-open"></i></span>
-						<span class="list-text"> 게시판 </span> <span> <a
-							class="boardName" href="#">공지사항</a>
+						<span class="list-text"> 카테고리 </span> <span> <a
+							class="boardName" href="#">카테고리</a>
 					</span>
 					</span>
 				</div>

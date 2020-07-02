@@ -239,7 +239,7 @@ footer>.list-footer {
 		<div class="flex flex-jc-c height-100p forTitle flex"
 			style="margin-bottom: 20px;">
 			<a class="title animate__animated animate__fadeInDown height-100p"
-				href="${pageContext.request.contextPath}/s/home/main"> <i
+				href="${pageContext.request.contextPath}/s/article/list?page=1"> <i
 				class="fas fa-rocket border"></i> 기록하는 블로그
 			</a>
 		</div>

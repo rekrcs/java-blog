@@ -1,5 +1,6 @@
 <%@ page import="java.util.List"%>
 <%@ page import="com.sbs.java.blog.dto.Article"%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/jsp/part/head.jspf"%>
@@ -13,6 +14,7 @@
 <%
 	int cateItemId = (int) request.getAttribute("cateItemId");
 %>
+
 
 <div class="body-content">
 	<section class="body-section">
@@ -32,8 +34,8 @@
 					</span>
 					</span> <span class="list-updateDate"> <span class="list-bar">|</span>
 						<span class="list-icon"><i class="far fa-folder-open"></i></span>
-						<span class="list-text"> 게시판 </span> <span> <a
-							class="boardName" href="#">공지사항</a>
+						<span class="list-text"> 카테고리 </span> <span> <a
+							class="boardName" href="#">카테고리</a>
 					</span>
 					</span>
 				</div>
@@ -62,12 +64,23 @@
 		%>
 
 		<div class="page-number-box">
-			<span class="page-number"> <%for (int i = 1; i <= totalPage; i++) {%>
-						<%if(cateItemId == 0) {%> 
-			<a href="${pageContext.request.contextPath}/s/article/list?page=<%=i%>">[<%=i%>]</a><%}%>	
-				<%if(cateItemId != 0) { %>
-			<a href="${pageContext.request.contextPath}/s/article/list?cateItemId=${param.cateItemId}&page=<%=i%>">[<%=i%>]</a><%}%>
-			<%}%></span>
+			<span class="page-number"> <%
+ 	for (int i = 1; i <= totalPage; i++) {
+ %> <%
+ 	if (cateItemId == 0) {
+ %> <a
+				href="${pageContext.request.contextPath}/s/article/list?page=<%=i%>">[<%=i%>]
+			</a> <%
+ 	}
+ %> <%
+ 	if (cateItemId != 0) {
+ %> <a
+				href="${pageContext.request.contextPath}/s/article/list?cateItemId=${param.cateItemId}&page=<%=i%>">[<%=i%>]
+			</a> <%
+ 	}
+ %> <%
+ 	}
+ %></span>
 		</div>
 	</section>
 </div>
