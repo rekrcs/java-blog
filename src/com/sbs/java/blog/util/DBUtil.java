@@ -1,6 +1,7 @@
 package com.sbs.java.blog.util;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
@@ -118,5 +119,33 @@ public class DBUtil {
 		}
 
 		return rows.get(0);
+	}
+
+	public static void insert(Connection connection, String sql) {
+		Statement stmt = null;
+
+		try {
+			stmt = connection.createStatement();
+			stmt.executeUpdate(sql);
+
+		} catch (SQLException e) {
+			System.err.printf("[SQL 예외] : %s\n", e.getMessage());
+		} finally {
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					System.err.printf("[SQL 예외, connection 닫기] : %s\n", e.getMessage());
+				}
+			}
+
+			if (stmt != null) {
+				try {
+					stmt.close();
+				} catch (SQLException e) {
+					System.err.printf("[SQL 예외, stmt 닫기] : %s\n", e.getMessage());
+				}
+			}
+		}
 	}
 }

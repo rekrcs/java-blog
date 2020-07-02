@@ -24,10 +24,21 @@ public class ArticleController extends Controller {
 		case "list":
 			return doActionList(request, response);
 		case "detail":
-		return doActionDetail(request, response);
+			return doActionDetail(request, response);
+		case "doWrite":
+			return doActionDoWrite(request, response);
 		}
 		return "";
 
+	}
+
+	private String doActionDoWrite(HttpServletRequest request, HttpServletResponse response) {
+		String title = request.getParameter("title");
+		String body = request.getParameter("body");
+		String cateItemId = request.getParameter("cateItemId");
+
+		articleService.doWriteArticle(title, body, cateItemId, request, response);
+		return "article/doWrite";
 	}
 
 	private String doActionDetail(HttpServletRequest request, HttpServletResponse response) {
@@ -42,7 +53,7 @@ public class ArticleController extends Controller {
 		if (request.getParameter("cateItemId") != null) {
 			cateItemId = Integer.parseInt(request.getParameter("cateItemId"));
 		}
-		
+
 		int page = 1;
 		if (request.getParameter("page") != null) {
 			page = Integer.parseInt(request.getParameter("page"));

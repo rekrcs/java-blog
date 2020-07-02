@@ -25,4 +25,10 @@ public class ArticleService {
 		return articleDao.getForDetailFromArticle(id, request, response);
 	}
 
+	public void doWriteArticle(String title, String body, String cateItemId, HttpServletRequest request, HttpServletResponse response) {
+		 articleDao.doWriteArticle(title, body, cateItemId, request, response);
+		
+		
+	}
+
 }
