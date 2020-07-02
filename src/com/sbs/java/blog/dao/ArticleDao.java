@@ -41,7 +41,7 @@ public class ArticleDao {
 		if (cateItemId != 0) {
 			sql2 += String.format(" WHERE cateItemId = %d", cateItemId);
 		}
-		int totalCount = DBUtil.getTotalCount(dbConnection, sql2);
+		int totalCount = DBUtil.getOneId(dbConnection, sql2);
 		totalPage = (int) Math.ceil((double) totalCount / itemsInAPage);
 		request.setAttribute("totalPage", totalPage);
 		request.setAttribute("cateItemId", cateItemId);
@@ -56,6 +56,22 @@ public class ArticleDao {
 	}
 
 	public Article getForDetailFromArticle(int id, HttpServletRequest request, HttpServletResponse response) {
+//		String strForFirstId = "";
+//		strForFirstId += String.format("SELECT * ");
+//		strForFirstId += String.format("FROM article ");
+//		strForFirstId += String.format("ORDER BY id ASC ");
+//		strForFirstId += String.format("LIMIT 1");
+//
+//		int firstId = DBUtil.getOneId(dbConnection, strForFirstId);
+//
+//		String strForLastId = "";
+//		strForLastId += String.format("SELECT * ");
+//		strForLastId += String.format("FROM article ");
+//		strForLastId += String.format("ORDER BY id DESC ");
+//		strForLastId += String.format("LIMIT 1");
+//
+//		int lastId = DBUtil.getOneId(dbConnection, strForLastId);
+
 		String sql = "";
 
 		sql += String.format("SELECT * ");
@@ -65,18 +81,41 @@ public class ArticleDao {
 		Map<String, Object> row = DBUtil.selectRow(dbConnection, sql);
 
 		Article article = new Article(row);
+		Article articleNext = null;
+		Article articlePrevious = null;
 
 		String sql2 = "";
-		Article articlePrevious = new Article();
+
 		sql2 += String.format("SELECT * ");
 		sql2 += String.format("FROM article ");
 		sql2 += String.format("WHERE id < %d", id);
 		sql2 += String.format(" ORDER BY id DESC");
 		sql2 += String.format(" LIMIT 1");
-		
-		articlePrevious =  (Article) DBUtil.selectRow(dbConnection, sql2);
+
+		Map<String, Object> row2 = DBUtil.selectRow(dbConnection, sql2);
+		if (row2.isEmpty()) {
+			articlePrevious = new Article(row);
+		} else {
+			articlePrevious = new Article(row2);
+		}
+		String sql3 = "";
+		sql3 += String.format("SELECT * ");
+		sql3 += String.format("FROM article ");
+		sql3 += String.format("WHERE id > %d", id);
+		sql3 += String.format(" ORDER BY id ASC");
+		sql3 += String.format(" LIMIT 1");
+
+		Map<String, Object> row3 = DBUtil.selectRow(dbConnection, sql3);
+		if (row3.isEmpty()) {
+			articleNext = new Article(row);
+		} else {
+			articleNext = new Article(row3);
+		}
+		System.out.println("articleNext : " + articleNext.getId());
+		System.out.println("articlePrevious : " + articlePrevious.getId());
+		System.out.println("Id : " + id);
+		request.setAttribute("articleNext", articleNext);
 		request.setAttribute("articlePrevious", articlePrevious);
-		
 		return article;
 	}
 

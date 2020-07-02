@@ -78,15 +78,15 @@ public class DBUtil {
 		return rows;
 	}
 
-	public static int getTotalCount(Connection connection, String sql) {
+	public static int getOneId(Connection connection, String sql) {
 		Statement stmt = null;
 		ResultSet rs = null;
-		int totalCount = -1;
+		int oneId = -1;
 		try {
 			stmt = connection.createStatement();
 			rs = stmt.executeQuery(sql);
 			if (rs.next()) {
-				totalCount = rs.getInt(1);
+				oneId = rs.getInt(1);
 			}
 		} catch (SQLException e) {
 			System.err.println("[SQLException 예외]");
@@ -111,7 +111,7 @@ public class DBUtil {
 			}
 		}
 
-		return totalCount;
+		return oneId;
 	}
 
 	public static Map<String, Object> selectRow(Connection connection, String sql) {
@@ -157,4 +157,10 @@ public class DBUtil {
 			}
 		}
 	}
+
+	public static Article getArticlePrevious(Connection connection, String sql) {
+		
+		return null;
+	}
+
 }
