@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.sbs.java.blog.controller.ArticleController;
 import com.sbs.java.blog.controller.Controller;
+import com.sbs.java.blog.controller.HomeController;
 import com.sbs.java.blog.controller.MemberController;
 
 @WebServlet("/s/*")
@@ -59,6 +60,9 @@ public class DispatcherServlet extends HttpServlet {
 				break;
 			case "member":
 				controller = new MemberController();
+				break;
+			case "home":
+				controller = new HomeController();
 				break;
 			}
 			if (controllerName != null) {
