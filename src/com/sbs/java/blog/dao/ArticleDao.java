@@ -61,14 +61,27 @@ public class ArticleDao {
 		sql += String.format("SELECT * ");
 		sql += String.format("FROM article ");
 		sql += String.format("WHERE id = %d", id);
-		
+
 		Map<String, Object> row = DBUtil.selectRow(dbConnection, sql);
-		
+
 		Article article = new Article(row);
+
+		String sql2 = "";
+		Article articlePrevious = new Article();
+		sql2 += String.format("SELECT * ");
+		sql2 += String.format("FROM article ");
+		sql2 += String.format("WHERE id < %d", id);
+		sql2 += String.format(" ORDER BY id DESC");
+		sql2 += String.format(" LIMIT 1");
+		
+		articlePrevious =  (Article) DBUtil.selectRow(dbConnection, sql2);
+		request.setAttribute("articlePrevious", articlePrevious);
+		
 		return article;
 	}
 
-	public void doWriteArticle(String title, String body, int cateItemId, HttpServletRequest request, HttpServletResponse response) {
+	public void doWriteArticle(String title, String body, int cateItemId, HttpServletRequest request,
+			HttpServletResponse response) {
 		String sql = "";
 		sql += String.format("INSERT INTO article ");
 		sql += String.format("SET regDate = NOW()");
@@ -79,7 +92,7 @@ public class ArticleDao {
 		sql += String.format(", body = '%s'", body);
 
 		DBUtil.insert(dbConnection, sql, response);
-		
+
 	}
 
 }
