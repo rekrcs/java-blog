@@ -73,10 +73,11 @@ public class ArticleDao {
 		sql += String.format("INSERT INTO article ");
 		sql += String.format("SET regDate = NOW()");
 		sql += String.format(", updateDate = NOW()");
+		sql += String.format(", disPlayStatus = 1");
 		sql += String.format(", cateItemId = %d", cateItemId);
 		sql += String.format(", title = '%s'", title);
 		sql += String.format(", body = '%s'", body);
-		
+
 		DBUtil.insert(dbConnection, sql, response);
 		
 	}
