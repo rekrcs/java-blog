@@ -27,20 +27,19 @@ public class ArticleNextArticleServlet extends HttpServlet {
 
 		String sql = "";
 		int id = Integer.parseInt(request.getParameter("id"));
-		
+
 		Article articleNext = new Article();
-		
 
 		sql += String.format("SELECT * ");
 		sql += String.format("FROM article ");
 		sql += String.format("WHERE id > %d", id);
 		sql += String.format(" ORDER BY id ASC");
 		sql += String.format(" LIMIT 1");
-		
+
 		Connection connection = null;
 		Statement stmt = null;
 		ResultSet rs = null;
-		
+
 		try {
 			Class.forName(driverName);
 			connection = DriverManager.getConnection(url, user, password);
@@ -54,10 +53,12 @@ public class ArticleNextArticleServlet extends HttpServlet {
 				articleNext.setTitle(rs.getString("title"));
 				articleNext.setBody(rs.getString("body"));
 			}
-			
-			request.setAttribute("articleNext", articleNext);
-			request.getRequestDispatcher("/s/article/detail?id=" + articleNext.getId()).forward(request, response);
-
+			if (articleNext.getBody() == null) {
+				response.getWriter().append("마지막페이지 입니다.");
+			} else {
+				request.setAttribute("articleNext", articleNext);
+				request.getRequestDispatcher("/s/article/detail?id=" + articleNext.getId()).forward(request, response);
+			}
 		} catch (ClassNotFoundException e) {
 			System.err.printf("[드라이버 클래스 로딩 예외] : %s\n", e.getMessage());
 		} catch (SQLException e) {
