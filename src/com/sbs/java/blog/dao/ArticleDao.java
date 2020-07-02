@@ -56,21 +56,24 @@ public class ArticleDao {
 	}
 
 	public Article getForDetailFromArticle(int id, HttpServletRequest request, HttpServletResponse response) {
-//		String strForFirstId = "";
-//		strForFirstId += String.format("SELECT * ");
-//		strForFirstId += String.format("FROM article ");
-//		strForFirstId += String.format("ORDER BY id ASC ");
-//		strForFirstId += String.format("LIMIT 1");
-//
-//		int firstId = DBUtil.getOneId(dbConnection, strForFirstId);
-//
-//		String strForLastId = "";
-//		strForLastId += String.format("SELECT * ");
-//		strForLastId += String.format("FROM article ");
-//		strForLastId += String.format("ORDER BY id DESC ");
-//		strForLastId += String.format("LIMIT 1");
-//
-//		int lastId = DBUtil.getOneId(dbConnection, strForLastId);
+		String strForFirstId = "";
+		strForFirstId += String.format("SELECT * ");
+		strForFirstId += String.format("FROM article ");
+		strForFirstId += String.format("ORDER BY id ASC ");
+		strForFirstId += String.format("LIMIT 1");
+
+		int firstId = DBUtil.getOneId(dbConnection, strForFirstId);
+
+		String strForLastId = "";
+		strForLastId += String.format("SELECT * ");
+		strForLastId += String.format("FROM article ");
+		strForLastId += String.format("ORDER BY id DESC ");
+		strForLastId += String.format("LIMIT 1");
+
+		int lastId = DBUtil.getOneId(dbConnection, strForLastId);
+		
+		request.setAttribute("firstId", firstId);
+		request.setAttribute("lastId", lastId);
 
 		String sql = "";
 
@@ -111,9 +114,7 @@ public class ArticleDao {
 		} else {
 			articleNext = new Article(row3);
 		}
-		System.out.println("articleNext : " + articleNext.getId());
-		System.out.println("articlePrevious : " + articlePrevious.getId());
-		System.out.println("Id : " + id);
+
 		request.setAttribute("articleNext", articleNext);
 		request.setAttribute("articlePrevious", articlePrevious);
 		return article;

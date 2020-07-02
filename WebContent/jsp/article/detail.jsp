@@ -12,6 +12,12 @@
 <%
 	Article articleNext = (Article) request.getAttribute("articleNext");
 %>
+<%
+	int firstId = (int) request.getAttribute("firstId");
+%>
+<%
+	int lastId = (int) request.getAttribute("lastId");
+%>
 <style>
 #viewer1 {
 	width: 800px;
@@ -56,7 +62,15 @@
 </div>
 <div id="viewer1"></div>
 <div class="previous-next-box">
-	<span class="previous-btn"><a href="${pageContext.request.contextPath}/s/article/detail?id=<%=articlePrevious.getId()%>"><i class="fas fa-angle-left"></i> 이전</a></span>
-	<span class="next-btn"><a href="${pageContext.request.contextPath}/s/article/detail?id=<%=articleNext.getId()%>">다음 <i class="fas fa-angle-right"></i></a></span>
+<%if(article.getId() == firstId) { %>
+	<span class="previous-btn"></span>
+	<span class="next-btn"><a href="${pageContext.request.contextPath}/s/article/detail?id=<%=articleNext.getId()%>"><%=articleNext.getTitle() %> <i class="fas fa-angle-right"></i></a></span>
+<%} else if (article.getId() == lastId) { %>
+<span class="previous-btn"><a href="${pageContext.request.contextPath}/s/article/detail?id=<%=articlePrevious.getId()%>"><i class="fas fa-angle-left"></i> <%=articlePrevious.getTitle() %></a></span>
+	<span class="next-btn"></span>
+<% }else {%> 
+	<span class="previous-btn"><a href="${pageContext.request.contextPath}/s/article/detail?id=<%=articlePrevious.getId()%>"><i class="fas fa-angle-left"></i> <%=articlePrevious.getTitle() %></a></span>
+	<span class="next-btn"><a href="${pageContext.request.contextPath}/s/article/detail?id=<%=articleNext.getId()%>"><%=articleNext.getTitle() %> <i class="fas fa-angle-right"></i></a></span>
+	<%} %>
 </div>
 <div class="forMargin"></div>
