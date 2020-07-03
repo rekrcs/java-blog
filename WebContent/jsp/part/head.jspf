@@ -135,6 +135,19 @@ hr {
 	width: 700px;
 }
 
+.list-body2-box>.list-cateName>a {
+	display: inline-block;
+	padding: 5px 20px;
+	border-radius: 10px;
+	background-color: #afafaf;
+	opacity: 0.7;
+
+}
+
+.list-body2-box>.list-cateName:hover>a {
+	opacity: 1;
+}
+
 .body-section {
 	padding-top: 40px;
 }
@@ -223,12 +236,12 @@ footer>.list-footer {
 .page-number-box>.page-number>a {
 	margin: 0 5px;
 	font-size: 20px;
-	padding:0;
-}
-.page-number-box>.page-number>a:hover {
-	background-color:#afafaf;
+	padding: 0;
 }
 
+.page-number-box>.page-number>a:hover {
+	background-color: #afafaf;
+}
 </style>
 <title>블로그</title>
 </head>
@@ -239,8 +252,8 @@ footer>.list-footer {
 		<div class="flex flex-jc-c height-100p forTitle flex"
 			style="margin-bottom: 20px;">
 			<a class="title animate__animated animate__fadeInDown height-100p"
-				href="${pageContext.request.contextPath}/s/article/list?page=1"> <i
-				class="fas fa-rocket border"></i> 기록하는 블로그
+				href="${pageContext.request.contextPath}/s/article/list?page=1">
+				<i class="fas fa-rocket border"></i> 기록하는 블로그
 			</a>
 		</div>
 		<div class="top-bar">

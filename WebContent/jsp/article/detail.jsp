@@ -41,7 +41,9 @@
 	margin-right: auto;
 	display:flex;
 	justify-content: space-between;
+	
 }
+
 </style>
 <header>
 

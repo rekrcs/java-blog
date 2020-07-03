@@ -54,10 +54,11 @@
 			</header>
 			<div class="list-body">
 				<div class="list-body2-box">
-					<h3>미리보기 or 소재목</h3>
-					<ul>
+				<span class="list-cateName"><a href="${pageContext.request.contextPath}/s/article/list?page=1&cateItemId=<%=cateNum%>"># <%=cateName%></a></span>
+<!--					<h3>미리보기 or 소재목</h3>
+ 					<ul>
 						<li>링크 혹은 참조</li>
-					</ul>
+					</ul> -->
 				</div>
 				<div class="btn-box">
 					<div class="list-detail-btn">
