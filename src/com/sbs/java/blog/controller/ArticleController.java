@@ -45,6 +45,23 @@ public class ArticleController extends Controller {
 		int id = Integer.parseInt(request.getParameter("id"));
 		Article article = articleService.getForDetailFromArticle(id, request, response);
 		request.setAttribute("article", article);
+		
+		int firstId = articleService.getFirstIdFromArticle();
+		request.setAttribute("firstId", firstId);
+		
+		int lastId = articleService.getLastIdFromArticle();
+		request.setAttribute("lastId", lastId);
+		
+		Article articleNext = articleService.getNextArticle(id, article);
+		request.setAttribute("articleNext", articleNext);
+		
+		Article articlePrevious = articleService.getPreviousArticle(id, article);
+		request.setAttribute("articlePrevious", articlePrevious);
+		
+		//extra 공부후 수정필요
+		List<Article> cateNameForArticles = articleService.getCateNameFromCateId();
+		request.setAttribute("cateNameForArticles", cateNameForArticles);
+		
 		return "article/detail";
 	}
 
@@ -58,8 +75,22 @@ public class ArticleController extends Controller {
 		if (request.getParameter("page") != null) {
 			page = Integer.parseInt(request.getParameter("page"));
 		}
-		List<Article> articles = articleService.getForPrintListArticles(page, cateItemId, request, response);
+
+		int itemsInAPage = 5;
+		int totalCount = articleService.getForPrintListArticlesCount(cateItemId);
+		int totalPage = (int) Math.ceil((double) totalCount / itemsInAPage);
+
+		request.setAttribute("totalPage", totalPage);
+		request.setAttribute("cateItemId", cateItemId);
+		request.setAttribute("page", page);
+
+		List<Article> articles = articleService.getForPrintListArticles(page, cateItemId, itemsInAPage, request, response);
 		request.setAttribute("articles", articles);
+		
+		//extra 공부후 수정필요
+		List<Article> cateNameForArticles = articleService.getCateNameFromCateId();
+		request.setAttribute("cateNameForArticles", cateNameForArticles);
+		
 		return "article/list";
 	}
 

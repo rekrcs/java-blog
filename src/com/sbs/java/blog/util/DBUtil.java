@@ -78,42 +78,6 @@ public class DBUtil {
 		return rows;
 	}
 
-	public static int getOneId(Connection connection, String sql) {
-		Statement stmt = null;
-		ResultSet rs = null;
-		int oneId = -1;
-		try {
-			stmt = connection.createStatement();
-			rs = stmt.executeQuery(sql);
-			if (rs.next()) {
-				oneId = rs.getInt(1);
-			}
-		} catch (SQLException e) {
-			System.err.println("[SQLException 예외]");
-			System.err.println("msg : " + e.getMessage());
-		} finally {
-			if (stmt != null) {
-				try {
-					stmt.close();
-				} catch (SQLException e) {
-					System.err.println("[SQLException 예외]");
-					System.err.println("msg : " + e.getMessage());
-				}
-			}
-
-			if (rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException e) {
-					System.err.println("[SQLException 예외]");
-					System.err.println("msg : " + e.getMessage());
-				}
-			}
-		}
-
-		return oneId;
-	}
-
 	public static Map<String, Object> selectRow(Connection connection, String sql) {
 		List<Map<String, Object>> rows = selectRows(connection, sql);
 
@@ -159,8 +123,70 @@ public class DBUtil {
 	}
 
 	public static Article getArticlePrevious(Connection connection, String sql) {
-		
+
 		return null;
 	}
 
+	public static int selectRowIntValue(Connection connection, String sql) {
+		Map<String, Object> row = selectRow(connection, sql);
+
+		for (String key : row.keySet()) {
+			return (int) row.get(key);
+		}
+		return -1;
+	}
+
+	public static String selectRowStringValue(Connection connection, String sql) {
+		Map<String, Object> row = selectRow(connection, sql);
+
+		for (String key : row.keySet()) {
+			return (String) row.get(key);
+		}
+		return "";
+	}
+
+	public static Boolean selectRowBooleanValue(Connection connection, String sql) {
+		Map<String, Object> row = selectRow(connection, sql);
+
+		for (String key : row.keySet()) {
+			return ((int) row.get(key)) == 1;
+		}
+		return false;
+	}
+
+	public static int getOneId(Connection connection, String sql) {
+		Statement stmt = null;
+		ResultSet rs = null;
+		int oneId = -1;
+		try {
+			stmt = connection.createStatement();
+			rs = stmt.executeQuery(sql);
+			if (rs.next()) {
+				oneId = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			System.err.println("[SQLException 예외]");
+			System.err.println("msg : " + e.getMessage());
+		} finally {
+			if (stmt != null) {
+				try {
+					stmt.close();
+				} catch (SQLException e) {
+					System.err.println("[SQLException 예외]");
+					System.err.println("msg : " + e.getMessage());
+				}
+			}
+
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					System.err.println("[SQLException 예외]");
+					System.err.println("msg : " + e.getMessage());
+				}
+			}
+		}
+
+		return oneId;
+	}
 }

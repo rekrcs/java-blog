@@ -6,23 +6,11 @@
 <%@ include file="/jsp/part/head.jspf"%>
 <%
 	Article article = (Article) request.getAttribute("article");
-%>
-<%
-	List<Article> articles2 = (List<Article>) request.getAttribute("articles2");
-%>
-<%
+	List<Article> cateNameForArticles = (List<Article>) request.getAttribute("cateNameForArticles");
 	Article articlePrevious = (Article) request.getAttribute("articlePrevious");
-%>
-<%
 	Article articleNext = (Article) request.getAttribute("articleNext");
-%>
-<%
 	int firstId = (int) request.getAttribute("firstId");
-%>
-<%
 	int lastId = (int) request.getAttribute("lastId");
-%>
-<%
 	List<CateItem> cateItems = (List<CateItem>) request.getAttribute("cateItems");
 %>
 <style>
@@ -51,7 +39,7 @@
 	<%
 		String cateName = null;
 		int cateNum = 0;
-		for (Article article2 : articles2) {
+		for (Article article2 : cateNameForArticles) {
 			if (article.getId() == article2.getId()) {
 				cateName = article2.getCateItemName();
 				cateNum = article2.getCateItemId();

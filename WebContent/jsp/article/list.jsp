@@ -6,32 +6,31 @@
 <%@ include file="/jsp/part/head.jspf"%>
 <%
 	List<Article> articles = (List<Article>) request.getAttribute("articles");
-%>
-<%
-	List<Article> articles2 = (List<Article>) request.getAttribute("articles2");
-%>
-
-<%
-	int totalPage = (int) request.getAttribute("totalPage");
-%>
-<%
-	int cateItemId = (int) request.getAttribute("cateItemId");
+List<Article> cateNameForArticles = (List<Article>) request.getAttribute("cateNameForArticles");
+int totalPage = (int) request.getAttribute("totalPage");
+int cateItemId = (int) request.getAttribute("cateItemId");
+int paramPage = (int) request.getAttribute("page");
 %>
 
-
+<style>
+.current {
+	background-color: #afafaf;
+	border-radius: 5px;
+}
+</style>
 <div class="body-content">
 	<section class="body-section">
 		<%
 			String cateName = null;
-			int cateNum = 0;
-			for (Article article : articles) {
-				for (Article article2 : articles2) {
-					if (article.getId() == article2.getId()) {
-						cateName = article2.getCateItemName();
-						cateNum = article2.getCateItemId();
-						break;
-					}
+		int cateNum = 0;
+		for (Article article : articles) {
+			for (Article article2 : cateNameForArticles) {
+				if (article.getId() == article2.getId()) {
+			cateName = article2.getCateItemName();
+			cateNum = article2.getCateItemId();
+			break;
 				}
+			}
 		%>
 		<article>
 			<header>
@@ -84,17 +83,15 @@
  	for (int i = 1; i <= totalPage; i++) {
  %> <%
  	if (cateItemId == 0) {
- %> <a
-				href="${pageContext.request.contextPath}/s/article/list?page=<%=i%>">[<%=i%>]</a> <%
+ %> <a class="<%=i == paramPage ? "current" : "" %>"
+				href="${pageContext.request.contextPath}/s/article/list?page=<%=i%>"><%=i%></a> <%
  	}
  %> <%
  	if (cateItemId != 0) {
- %> <a
-				href="${pageContext.request.contextPath}/s/article/list?cateItemId=${param.cateItemId}&page=<%=i%>">[<%=i%>]
-			</a>
-				<%
-					}
-				%> <%
+ %> <a class="<%=i == paramPage ? "current" : "" %>"
+				href="${pageContext.request.contextPath}/s/article/list?cateItemId=${param.cateItemId}&page=<%=i%>"><%=i%></a> <%
+ 	}
+ %> <%
  	}
  %></span>
 		</div>
