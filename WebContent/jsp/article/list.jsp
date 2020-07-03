@@ -22,16 +22,16 @@
 <div class="body-content">
 	<section class="body-section">
 		<%
-		String cateName = null;
-		int cateNum = 0;
+			String cateName = null;
+			int cateNum = 0;
 			for (Article article : articles) {
-			for (Article article2 : articles2) {
-				if(article.getId() == article2.getId()) {
-					cateName = article2.getCateItemName();
-					cateNum = article2.getCateItemId();
-					break;
+				for (Article article2 : articles2) {
+					if (article.getId() == article2.getId()) {
+						cateName = article2.getCateItemName();
+						cateNum = article2.getCateItemId();
+						break;
+					}
 				}
-			}
 		%>
 		<article>
 			<header>
@@ -47,15 +47,18 @@
 					</span> <span class="list-updateDate"> <span class="list-bar">|</span>
 						<span class="list-icon"><i class="far fa-folder-open"></i></span>
 						<span class="list-text"> 카테고리 </span> <span> <a
-							class="boardName" href="${pageContext.request.contextPath}/s/article/list?page=1&cateItemId=<%=cateNum%>"><%=cateName%></a>
+							class="boardName"
+							href="${pageContext.request.contextPath}/s/article/list?page=1&cateItemId=<%=cateNum%>"><%=cateName%></a>
 					</span>
 					</span>
 				</div>
 			</header>
 			<div class="list-body">
 				<div class="list-body2-box">
-				<span class="list-cateName"><a href="${pageContext.request.contextPath}/s/article/list?page=1&cateItemId=<%=cateNum%>"># <%=cateName%></a></span>
-<!--					<h3>미리보기 or 소재목</h3>
+					<span class="list-cateName"><a
+						href="${pageContext.request.contextPath}/s/article/list?page=1&cateItemId=<%=cateNum%>">#
+							<%=cateName%></a></span>
+					<!--					<h3>미리보기 or 소재목</h3>
  					<ul>
 						<li>링크 혹은 참조</li>
 					</ul> -->
@@ -82,13 +85,18 @@
  %> <%
  	if (cateItemId == 0) {
  %> <a
-				href="${pageContext.request.contextPath}/s/article/list?page=<%=i%>">[<%=i%>]
-			</a> <%
+				href="${pageContext.request.contextPath}/s/article/list?page=<%=i%>">[<%=i%>]</a> <%
  	}
  %> <%
  	if (cateItemId != 0) {
- %> <a href="${pageContext.request.contextPath}/s/article/list?cateItemId=${param.cateItemId}&page=<%=i%>">[<%=i%>]</a> <%}%> 
- <%}%></span>
+ %> <a
+				href="${pageContext.request.contextPath}/s/article/list?cateItemId=${param.cateItemId}&page=<%=i%>">[<%=i%>]
+			</a>
+				<%
+					}
+				%> <%
+ 	}
+ %></span>
 		</div>
 	</section>
 </div>

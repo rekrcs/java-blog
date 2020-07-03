@@ -244,6 +244,7 @@ footer>.list-footer {
 .page-number-box>.page-number>a:hover {
 	background-color: #afafaf;
 }
+
 </style>
 <title>블로그</title>
 </head>
