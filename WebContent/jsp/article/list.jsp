@@ -87,13 +87,8 @@
  	}
  %> <%
  	if (cateItemId != 0) {
- %> <a
-				href="${pageContext.request.contextPath}/s/article/list?cateItemId=${param.cateItemId}&page=<%=i%>">[<%=i%>]
-			</a> <%
- 	}
- %> <%
- 	}
- %></span>
+ %> <a href="${pageContext.request.contextPath}/s/article/list?cateItemId=${param.cateItemId}&page=<%=i%>">[<%=i%>]</a> <%}%> 
+ <%}%></span>
 		</div>
 	</section>
 </div>

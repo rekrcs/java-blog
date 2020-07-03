@@ -28,50 +28,52 @@
 <style>
 #viewer1 {
 	width: 800px;
-	margin-left:auto;
+	margin-left: auto;
 	margin-right: auto;
 }
+
 .forMargin {
 	margin-bottom: 100px;
 }
-.previous-next-box {
-	margin:50px 0;
-	width: 900px;
-	margin-left:auto;
-	margin-right: auto;
-	display:flex;
-	justify-content: space-between;
-	
-}
 
+.previous-next-box {
+	margin: 50px 0;
+	width: 900px;
+	margin-left: auto;
+	margin-right: auto;
+	display: flex;
+	justify-content: space-between;
+}
 </style>
 <header>
 
 	<%
-	String cateName = null;
-	int cateNum = 0;
-	for(Article article2 : articles2) {
-		if(article.getId() == article2.getId()) {
-			cateName = article2.getCateItemName();
-			cateNum = article2.getCateItemId();
+		String cateName = null;
+		int cateNum = 0;
+		for (Article article2 : articles2) {
+			if (article.getId() == article2.getId()) {
+				cateName = article2.getCateItemName();
+				cateNum = article2.getCateItemId();
+			}
 		}
-}%>
-				<h1 class="list-title">
-					<a class="title-underline" href="${pageContext.request.contextPath}/s/article/detail?id=<%=article.getId()%>"><%=article.getTitle()%></a>
-				</h1>
-				<div class="list-info">
-					<span class="list-regDate"> <span class="list-icon">
-							<i class="far fa-calendar"></i>
-					</span> <span class="list-text"> 작성일 </span> <span> <%=article.getRegDate()%>
-					</span>
-					</span> <span class="list-updateDate"> <span class="list-bar">|</span>
-						<span class="list-icon"><i class="far fa-folder-open"></i></span>
-						<span class="list-text"> 카테고리 </span> <span> <a
-							class="boardName" href="${pageContext.request.contextPath}/s/article/list?page=1&cateItemId=<%=cateNum%>"><%=cateName%></a>
-					</span>
-					</span>
-				</div>
-			</header>
+	%>
+	<h1 class="list-title">
+		<a class="title-underline"
+			href="${pageContext.request.contextPath}/s/article/detail?id=<%=article.getId()%>"><%=article.getTitle()%></a>
+	</h1>
+	<div class="list-info">
+		<span class="list-regDate"> <span class="list-icon"> <i
+				class="far fa-calendar"></i>
+		</span> <span class="list-text"> 작성일 </span> <span> <%=article.getRegDate()%>
+		</span>
+		</span> <span class="list-updateDate"> <span class="list-bar">|</span>
+			<span class="list-icon"><i class="far fa-folder-open"></i></span> <span
+			class="list-text"> 카테고리 </span> <span> <a class="boardName"
+				href="${pageContext.request.contextPath}/s/article/list?page=1&cateItemId=<%=cateNum%>"><%=cateName%></a>
+		</span>
+		</span>
+	</div>
+</header>
 <div id="origin1">
 작성일 : <%=article.getRegDate()%>  
 수정일 : <%=article.getUpdateDate()%>
@@ -81,15 +83,29 @@
 </div>
 <div id="viewer1"></div>
 <div class="previous-next-box">
-<%if(article.getId() == firstId) { %>
-	<span class="previous-btn"></span>
-	<span class="next-btn"><a href="${pageContext.request.contextPath}/s/article/detail?id=<%=articleNext.getId()%>"><%=articleNext.getTitle() %> <i class="fas fa-angle-right"></i></a></span>
-<%} else if (article.getId() == lastId) { %>
-<span class="previous-btn"><a href="${pageContext.request.contextPath}/s/article/detail?id=<%=articlePrevious.getId()%>"><i class="fas fa-angle-left"></i> <%=articlePrevious.getTitle() %></a></span>
-	<span class="next-btn"></span>
-<% }else {%> 
-	<span class="previous-btn"><a href="${pageContext.request.contextPath}/s/article/detail?id=<%=articlePrevious.getId()%>"><i class="fas fa-angle-left"></i> <%=articlePrevious.getTitle() %></a></span>
-	<span class="next-btn"><a href="${pageContext.request.contextPath}/s/article/detail?id=<%=articleNext.getId()%>"><%=articleNext.getTitle() %> <i class="fas fa-angle-right"></i></a></span>
-	<%} %>
+	<%
+		if (article.getId() == firstId) {
+	%>
+	<span class="previous-btn"></span> <span class="next-btn"><a
+		href="${pageContext.request.contextPath}/s/article/detail?id=<%=articleNext.getId()%>"><%=articleNext.getTitle()%>
+			<i class="fas fa-angle-right"></i></a></span>
+	<%
+		} else if (article.getId() == lastId) {
+	%>
+	<span class="previous-btn"><a
+		href="${pageContext.request.contextPath}/s/article/detail?id=<%=articlePrevious.getId()%>"><i
+			class="fas fa-angle-left"></i> <%=articlePrevious.getTitle()%></a></span> <span
+		class="next-btn"></span>
+	<%
+		} else {
+	%>
+	<span class="previous-btn"><a
+		href="${pageContext.request.contextPath}/s/article/detail?id=<%=articlePrevious.getId()%>"><i
+			class="fas fa-angle-left"></i> <%=articlePrevious.getTitle()%></a></span> <span
+		class="next-btn"><a
+		href="${pageContext.request.contextPath}/s/article/detail?id=<%=articleNext.getId()%>"><%=articleNext.getTitle()%>
+			<i class="fas fa-angle-right"></i></a> <%
+ 	}
+ %>
 </div>
 <div class="forMargin"></div>
