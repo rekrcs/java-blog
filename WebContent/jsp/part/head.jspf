@@ -244,7 +244,13 @@ footer>.list-footer {
 .page-number-box>.page-number>a:hover {
 	background-color: #afafaf;
 }
-
+.mobile-side-bar {
+	z-index: 1;
+}
+.mobile-top-bar {
+	z-index: 1;
+	background-color: white;
+}
 </style>
 <title>블로그</title>
 </head>
@@ -301,7 +307,7 @@ footer>.list-footer {
 	</div>
 
 	<div class="mobile-side-bar visible-on-sm-down">
-		<nav class="menu-box-1 flex-grow-1">
+		<nav class="menu-box-1  flex-grow-1">
 			<ul>
 				<li><a
 					href="${pageContext.request.contextPath}/s/article/list?page=1"
