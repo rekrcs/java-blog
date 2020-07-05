@@ -13,13 +13,20 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.sbs.java.blog.dto.Article;
 
 public class DBUtil {
+	private HttpServletRequest request;
+	private HttpServletResponse response;
+	public DBUtil(HttpServletRequest request, HttpServletResponse response) {
+		this.request = request;
+		this.response = response;
+	}
 
-	public static List<Map<String, Object>> selectRows(Connection connection, String sql) {
+	public List<Map<String, Object>> selectRows(Connection connection, String sql) {
 		List<Map<String, Object>> rows = new ArrayList<>();
 
 		Statement stmt = null;
@@ -53,15 +60,13 @@ public class DBUtil {
 				rows.add(row);
 			}
 		} catch (SQLException e) {
-			System.err.println("[SQLException 예외]");
-			System.err.println("msg : " + e.getMessage());
+			Util.printEx("SQL 예외, SQL : " + sql, response, e);
 		} finally {
 			if (stmt != null) {
 				try {
 					stmt.close();
 				} catch (SQLException e) {
-					System.err.println("[SQLException 예외]");
-					System.err.println("msg : " + e.getMessage());
+					Util.printEx("SQL 예외, stmt 닫기 ", response, e);
 				}
 			}
 
@@ -69,8 +74,7 @@ public class DBUtil {
 				try {
 					rs.close();
 				} catch (SQLException e) {
-					System.err.println("[SQLException 예외]");
-					System.err.println("msg : " + e.getMessage());
+					Util.printEx("SQL 예외, rs 닫기 ", response, e);
 				}
 			}
 		}
@@ -78,7 +82,7 @@ public class DBUtil {
 		return rows;
 	}
 
-	public static Map<String, Object> selectRow(Connection connection, String sql) {
+	public Map<String, Object> selectRow(Connection connection, String sql) {
 		List<Map<String, Object>> rows = selectRows(connection, sql);
 
 		if (rows.size() == 0) {
@@ -88,7 +92,7 @@ public class DBUtil {
 		return rows.get(0);
 	}
 
-	public static void insert(Connection connection, String sql, HttpServletResponse response) {
+	public void insert(Connection connection, String sql, HttpServletResponse response) {
 		Statement stmt = null;
 
 		try {
@@ -102,13 +106,13 @@ public class DBUtil {
 			}
 
 		} catch (SQLException e) {
-			System.err.printf("[SQL 예외] : %s\n", e.getMessage());
+			Util.printEx("SQL 예외, SQL : " + sql, response, e);
 		} finally {
 			if (connection != null) {
 				try {
 					connection.close();
 				} catch (SQLException e) {
-					System.err.printf("[SQL 예외, connection 닫기] : %s\n", e.getMessage());
+					Util.printEx("SQL 예외, connection 닫기 ", response, e);
 				}
 			}
 
@@ -116,18 +120,18 @@ public class DBUtil {
 				try {
 					stmt.close();
 				} catch (SQLException e) {
-					System.err.printf("[SQL 예외, stmt 닫기] : %s\n", e.getMessage());
+					Util.printEx("SQL 예외, stmt 닫기 ", response, e);
 				}
 			}
 		}
 	}
 
-	public static Article getArticlePrevious(Connection connection, String sql) {
+	public Article getArticlePrevious(Connection connection, String sql) {
 
 		return null;
 	}
 
-	public static int selectRowIntValue(Connection connection, String sql) {
+	public int selectRowIntValue(Connection connection, String sql) {
 		Map<String, Object> row = selectRow(connection, sql);
 
 		for (String key : row.keySet()) {
@@ -136,7 +140,7 @@ public class DBUtil {
 		return -1;
 	}
 
-	public static String selectRowStringValue(Connection connection, String sql) {
+	public String selectRowStringValue(Connection connection, String sql) {
 		Map<String, Object> row = selectRow(connection, sql);
 
 		for (String key : row.keySet()) {
@@ -145,7 +149,7 @@ public class DBUtil {
 		return "";
 	}
 
-	public static Boolean selectRowBooleanValue(Connection connection, String sql) {
+	public boolean selectRowBooleanValue(Connection connection, String sql) {
 		Map<String, Object> row = selectRow(connection, sql);
 
 		for (String key : row.keySet()) {
@@ -154,7 +158,7 @@ public class DBUtil {
 		return false;
 	}
 
-	public static int getOneId(Connection connection, String sql) {
+	public int getOneId(Connection connection, String sql) {
 		Statement stmt = null;
 		ResultSet rs = null;
 		int oneId = -1;
@@ -165,15 +169,13 @@ public class DBUtil {
 				oneId = rs.getInt(1);
 			}
 		} catch (SQLException e) {
-			System.err.println("[SQLException 예외]");
-			System.err.println("msg : " + e.getMessage());
+			Util.printEx("SQL 예외, SQL : " + sql, response, e);
 		} finally {
 			if (stmt != null) {
 				try {
 					stmt.close();
 				} catch (SQLException e) {
-					System.err.println("[SQLException 예외]");
-					System.err.println("msg : " + e.getMessage());
+					Util.printEx("SQL 예외, stmt 닫기 ", response, e);
 				}
 			}
 
@@ -181,8 +183,7 @@ public class DBUtil {
 				try {
 					rs.close();
 				} catch (SQLException e) {
-					System.err.println("[SQLException 예외]");
-					System.err.println("msg : " + e.getMessage());
+					Util.printEx("SQL 예외, rs 닫기 ", response, e);
 				}
 			}
 		}

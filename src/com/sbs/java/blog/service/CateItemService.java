@@ -10,11 +10,12 @@ import com.sbs.java.blog.dao.ArticleDao;
 import com.sbs.java.blog.dao.CateItemDao;
 import com.sbs.java.blog.dto.CateItem;
 
-public class CateItemService {
+public class CateItemService extends Service {
 	private CateItemDao cateItemDao;
 
-	public CateItemService(Connection dbConnection) {
-		this.cateItemDao = new CateItemDao(dbConnection);
+	public CateItemService(Connection dbConnection, HttpServletRequest request, HttpServletResponse response) {
+		super(request, response);
+		this.cateItemDao = new CateItemDao(dbConnection, request, response);
 	}
 
 	public List<CateItem> getCateItems(HttpServletRequest request, HttpServletResponse response) {

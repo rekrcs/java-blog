@@ -15,12 +15,20 @@ import com.sbs.java.blog.util.Util;
 public class ArticleController extends Controller {
 	private ArticleService articleService;
 
-	public ArticleController(Connection dbConnection) {
-		articleService = new ArticleService(dbConnection);
+	public ArticleController(Connection dbConnection, String actionMethodName, HttpServletRequest request,
+			HttpServletResponse response) {
+		super(dbConnection, actionMethodName, request, response);
+		articleService = new ArticleService(dbConnection, request, response);
+	}
+
+	public void beforeAction() {
+		super.beforeAction();
+		// 이 메서드는 게시물 컨트롤러의 모든 액션이 실행되기 전에 실행 된다.
+		// 필요 없다면 지워도 된다.
 	}
 
 	@Override
-	public String doAction(String actionMethodName, HttpServletRequest request, HttpServletResponse response) {
+	public String doAction() {
 		switch (actionMethodName) {
 		case "list":
 			return doActionList(request, response);
@@ -44,11 +52,11 @@ public class ArticleController extends Controller {
 
 	private String doActionDetail(HttpServletRequest request, HttpServletResponse response) {
 		if (Util.empty(request, "id")) {
-			return "plain:id를 입력해 주세요.";
+			return "html:id를 입력해 주세요.";
 		}
 
 		if (Util.isNum(request, "id")) {
-			return "plain:id를 정수로 입력해 주세요.";
+			return "html:id를 정수로 입력해 주세요.";
 		}
 
 		int id = Util.getInt(request, "id");
@@ -71,10 +79,10 @@ public class ArticleController extends Controller {
 		// extra 추가후
 		List<Article> cateNameForArticles = articleService.getCateNameFromCateId();
 		request.setAttribute("cateNameForArticles", cateNameForArticles);
-		
-		//추가
+
+		// 추가
 		Article articlePlus = articleService.getForPrintArticle(id);
-		
+
 		return "article/detail.jsp";
 	}
 

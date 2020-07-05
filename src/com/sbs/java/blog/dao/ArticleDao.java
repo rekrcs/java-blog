@@ -11,11 +11,14 @@ import javax.servlet.http.HttpServletResponse;
 import com.sbs.java.blog.dto.Article;
 import com.sbs.java.blog.util.DBUtil;
 
-public class ArticleDao {
+public class ArticleDao extends Dao {
 	private Connection dbConnection;
+	private DBUtil dbUtil;
 
-	public ArticleDao(Connection dbConnection) {
+	public ArticleDao(Connection dbConnection, HttpServletRequest request, HttpServletResponse response) {
+		super(request, response);
 		this.dbConnection = dbConnection;
+		dbUtil = new DBUtil(request, response);
 	}
 
 	public List<Article> getForPrintListArticles(int page, int cateItemId, int itemsInAPage, HttpServletRequest request,
@@ -33,7 +36,7 @@ public class ArticleDao {
 		sql += String.format("ORDER BY id DESC ");
 		sql += String.format("LIMIT %d, %d ", limitFrom, itemsInAPage);
 
-		List<Map<String, Object>> rows = DBUtil.selectRows(dbConnection, sql);
+		List<Map<String, Object>> rows = dbUtil.selectRows(dbConnection, sql);
 		List<Article> articles = new ArrayList<>();
 
 		for (Map<String, Object> row : rows) {
@@ -51,7 +54,7 @@ public class ArticleDao {
 		sql += String.format("FROM article ");
 		sql += String.format("WHERE id = %d", id);
 
-		Map<String, Object> row = DBUtil.selectRow(dbConnection, sql);
+		Map<String, Object> row = dbUtil.selectRow(dbConnection, sql);
 
 		Article article = new Article(row);
 
@@ -69,7 +72,7 @@ public class ArticleDao {
 		sql += String.format(", title = '%s'", title);
 		sql += String.format(", body = '%s'", body);
 
-		DBUtil.insert(dbConnection, sql, response);
+		dbUtil.insert(dbConnection, sql, response);
 
 	}
 
@@ -82,7 +85,7 @@ public class ArticleDao {
 		if (cateItemId != 0) {
 			sql += String.format(" AND cateItemId = %d", cateItemId);
 		}
-		int totalCount = DBUtil.selectRowIntValue(dbConnection, sql);
+		int totalCount = dbUtil.selectRowIntValue(dbConnection, sql);
 
 		return totalCount;
 	}
@@ -94,7 +97,7 @@ public class ArticleDao {
 		sql += String.format("ORDER BY id ASC ");
 		sql += String.format("LIMIT 1");
 
-		int firstId = DBUtil.selectRowIntValue(dbConnection, sql);
+		int firstId = dbUtil.selectRowIntValue(dbConnection, sql);
 
 		return firstId;
 	}
@@ -106,7 +109,7 @@ public class ArticleDao {
 		sql += String.format("ORDER BY id DESC ");
 		sql += String.format("LIMIT 1");
 
-		int lastId = DBUtil.selectRowIntValue(dbConnection, sql);
+		int lastId = dbUtil.selectRowIntValue(dbConnection, sql);
 
 		return lastId;
 	}
@@ -120,7 +123,7 @@ public class ArticleDao {
 		sql += String.format(" LIMIT 1");
 
 		Article articleNext = null;
-		Map<String, Object> row = DBUtil.selectRow(dbConnection, sql);
+		Map<String, Object> row = dbUtil.selectRow(dbConnection, sql);
 		if (row.isEmpty()) {
 			articleNext = article;
 		} else {
@@ -140,7 +143,7 @@ public class ArticleDao {
 		sql += String.format(" ORDER BY id DESC");
 		sql += String.format(" LIMIT 1");
 
-		Map<String, Object> row = DBUtil.selectRow(dbConnection, sql);
+		Map<String, Object> row = dbUtil.selectRow(dbConnection, sql);
 		if (row.isEmpty()) {
 			articlePrevious = article;
 		} else {
@@ -159,16 +162,14 @@ public class ArticleDao {
 		sql += String.format("ON A.cateItemId = C.id ");
 		sql += String.format("WHERE 1 ");
 		sql += String.format("AND disPlayStatus = 1 ");
-		
-		
-		
+
 //		String sql = "";
 //		sql += String.format("SELECT A.*, C.name AS cateItemName ");
 //		sql += String.format("FROM article AS A ");
 //		sql += String.format("INNER JOIN cateItem AS C ");
 //		sql += String.format("ON A.cateItemId = C.id ");
 
-		List<Map<String, Object>> rows = DBUtil.selectRows(dbConnection, sql);
+		List<Map<String, Object>> rows = dbUtil.selectRows(dbConnection, sql);
 		List<Article> cateNameForArticles = new ArrayList<>();
 
 		for (Map<String, Object> row : rows) {
@@ -187,7 +188,7 @@ public class ArticleDao {
 		sql += String.format("AND id = %d ", id);
 		sql += String.format("AND disPlayStatus = 1 ");
 
-		return new Article(DBUtil.selectRow(dbConnection, sql));
+		return new Article(dbUtil.selectRow(dbConnection, sql));
 	}
 
 }

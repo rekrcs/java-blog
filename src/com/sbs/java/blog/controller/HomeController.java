@@ -7,17 +7,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.sbs.java.blog.dto.CateItem;
+import com.sbs.java.blog.service.ArticleService;
 import com.sbs.java.blog.service.CateItemService;
 
 public class HomeController extends Controller {
 	private CateItemService cateItemService;
 
-	public HomeController(Connection dbConnection) {
-		this.cateItemService = new CateItemService(dbConnection);
+	public HomeController(Connection dbConnection, String actionMethodName, HttpServletRequest request,
+			HttpServletResponse response) {
+		super(dbConnection, actionMethodName, request, response);
+		cateItemService = new CateItemService(dbConnection, request, response);
 	}
 
 	@Override
-	public String doAction(String actionMethodName, HttpServletRequest request, HttpServletResponse response) {
+	public String doAction() {
 		switch (actionMethodName) {
 		case "aboutMe":
 			return doActionAboutMe(request, response);

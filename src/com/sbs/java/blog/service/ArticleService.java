@@ -9,12 +9,13 @@ import javax.servlet.http.HttpServletResponse;
 import com.sbs.java.blog.dao.ArticleDao;
 import com.sbs.java.blog.dto.Article;
 
-public class ArticleService {
+public class ArticleService extends Service {
 
 	private ArticleDao articleDao;
 
-	public ArticleService(Connection dbConnection) {
-		this.articleDao = new ArticleDao(dbConnection);
+	public ArticleService(Connection dbConnection, HttpServletRequest request, HttpServletResponse response) {
+		super(request, response);
+		this.articleDao = new ArticleDao(dbConnection, request, response);
 	}
 
 	public List<Article> getForPrintListArticles(int page, int cateItemId, int itemsInAPage, HttpServletRequest request,
