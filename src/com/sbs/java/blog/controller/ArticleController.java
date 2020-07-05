@@ -13,12 +13,10 @@ import com.sbs.java.blog.service.ArticleService;
 import com.sbs.java.blog.util.Util;
 
 public class ArticleController extends Controller {
-	private ArticleService articleService;
-
 	public ArticleController(Connection dbConnection, String actionMethodName, HttpServletRequest request,
 			HttpServletResponse response) {
 		super(dbConnection, actionMethodName, request, response);
-		articleService = new ArticleService(dbConnection, request, response);
+		
 	}
 
 	public void beforeAction() {

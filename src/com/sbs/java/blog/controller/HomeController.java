@@ -7,16 +7,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.sbs.java.blog.dto.CateItem;
-import com.sbs.java.blog.service.ArticleService;
-import com.sbs.java.blog.service.CateItemService;
 
 public class HomeController extends Controller {
-	private CateItemService cateItemService;
-
 	public HomeController(Connection dbConnection, String actionMethodName, HttpServletRequest request,
 			HttpServletResponse response) {
 		super(dbConnection, actionMethodName, request, response);
-		cateItemService = new CateItemService(dbConnection, request, response);
+		
+	}
+
+	public void beforeAction() {
+		super.beforeAction();
+		// 이 메서드는 게시물 컨트롤러의 모든 액션이 실행되기 전에 실행 된다.
+		// 필요 없다면 지워도 된다.
 	}
 
 	@Override
@@ -46,7 +48,7 @@ public class HomeController extends Controller {
 	}
 
 	private String doActionArticles(HttpServletRequest request, HttpServletResponse response) {
-		List<CateItem> cateItems = cateItemService.getCateItems(request, response);
+		List<CateItem> cateItems = articleService.getCateItems(request, response);
 		request.setAttribute("cateItems", cateItems);
 		return "home/articles.jsp";
 	}

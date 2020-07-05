@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.sbs.java.blog.dao.ArticleDao;
 import com.sbs.java.blog.dto.Article;
+import com.sbs.java.blog.dto.CateItem;
 
 public class ArticleService extends Service {
 
@@ -34,7 +35,7 @@ public class ArticleService extends Service {
 	}
 
 	public int getForPrintListArticlesCount(int cateItemId) {
-		
+
 		return articleDao.getForPrintListArticlesCount(cateItemId);
 	}
 
@@ -59,8 +60,16 @@ public class ArticleService extends Service {
 	}
 
 	public Article getForPrintArticle(int id) {
-		
+
 		return articleDao.getForPrintArticle(id);
+	}
+
+	public List<CateItem> getForPrintCateItems() {
+		return articleDao.getForPrintCateItems();
+	}
+
+	public List<CateItem> getCateItems(HttpServletRequest request, HttpServletResponse response) {
+		return articleDao.getCateItems(request, response);
 	}
 
 }

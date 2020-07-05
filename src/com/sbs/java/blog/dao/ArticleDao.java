@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.sbs.java.blog.dto.Article;
+import com.sbs.java.blog.dto.CateItem;
 import com.sbs.java.blog.util.DBUtil;
 
 public class ArticleDao extends Dao {
@@ -189,6 +190,38 @@ public class ArticleDao extends Dao {
 		sql += String.format("AND disPlayStatus = 1 ");
 
 		return new Article(dbUtil.selectRow(dbConnection, sql));
+	}
+
+	public List<CateItem> getForPrintCateItems() {
+		String sql = "";
+		sql += String.format("SELECT * ");
+		sql += String.format("FROM cateItem ");
+		sql += String.format("WHTER 1 ");
+		sql += String.format("ORDER BY id ASC ");
+
+		List<Map<String, Object>> rows = dbUtil.selectRows(dbConnection, sql);
+		List<CateItem> cateItems = new ArrayList<>();
+
+		for (Map<String, Object> row : rows) {
+			cateItems.add(new CateItem(row));
+		}
+
+		return cateItems;
+	}
+
+	public List<CateItem> getCateItems(HttpServletRequest request, HttpServletResponse response) {
+		String sql = "";
+		sql += String.format("SELECT * ");
+		sql += String.format("FROM cateItem ");
+
+		List<Map<String, Object>> rows = dbUtil.selectRows(dbConnection, sql);
+		List<CateItem> cateItems = new ArrayList<>();
+
+		for (Map<String, Object> row : rows) {
+			cateItems.add(new CateItem(row));
+		}
+
+		return cateItems;
 	}
 
 }
