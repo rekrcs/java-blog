@@ -1,6 +1,10 @@
 package com.sbs.java.blog.util;
 
+import java.io.IOException;
+import java.sql.SQLException;
+
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 public class Util {
 	public static boolean empty(HttpServletRequest request, String paramName) {
@@ -51,5 +55,18 @@ public class Util {
 
 	public static int getInt(HttpServletRequest request, String paramName) {
 		return Integer.parseInt(request.getParameter(paramName));
+	}
+
+	public static void printEx(String errName, HttpServletResponse response, Exception e) {
+		try {
+			response.getWriter()
+					.append("<h1 style='color:red; font-weight:bold; text-align:left;'>[에러 : " + errName + "]</h1>");
+			response.getWriter().append("<pre style='text-align:left; font-weight:bold; font-size:1.3rem;'>");
+			e.printStackTrace(response.getWriter());
+			response.getWriter().append("</pre>");
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+
 	}
 }

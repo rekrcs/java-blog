@@ -60,7 +60,7 @@
 	<div class="list-info">
 		<span class="list-regDate"> <span class="list-icon"> <i
 				class="far fa-calendar"></i>
-		</span> <span class="list-text"> 작성일 </span> <span> <%=article.getRegDate()%>
+		</span> <span class="list-text"> 작성일 </span> <span> <%=article.getRegDate().substring(0, 10)%>
 		</span>
 		</span> <span class="list-updateDate"> <span class="list-bar">|</span>
 			<span class="list-icon"><i class="far fa-folder-open"></i></span> <span

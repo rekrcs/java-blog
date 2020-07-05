@@ -52,7 +52,7 @@ public class ArticleController extends Controller {
 		}
 
 		int id = Util.getInt(request, "id");
-//		id = Integer.parseInt(request.getParameter("id"));
+
 		Article article = articleService.getForDetailFromArticle(id, request, response);
 		request.setAttribute("article", article);
 
@@ -68,12 +68,12 @@ public class ArticleController extends Controller {
 		Article articlePrevious = articleService.getPreviousArticle(id, article);
 		request.setAttribute("articlePrevious", articlePrevious);
 
-		// extra 공부후 수정필요
+		// extra 추가후
 		List<Article> cateNameForArticles = articleService.getCateNameFromCateId();
 		request.setAttribute("cateNameForArticles", cateNameForArticles);
 		
 		//추가
-//		Article articlePlus = articleService.getForPrintArticle(id);
+		Article articlePlus = articleService.getForPrintArticle(id);
 		
 		return "article/detail.jsp";
 	}
@@ -101,7 +101,7 @@ public class ArticleController extends Controller {
 				response);
 		request.setAttribute("articles", articles);
 
-		// extra 공부후 수정필요
+		// extra 추가후
 		List<Article> cateNameForArticles = articleService.getCateNameFromCateId();
 		request.setAttribute("cateNameForArticles", cateNameForArticles);
 

@@ -181,7 +181,7 @@ public class ArticleDao {
 	public Article getForPrintArticle(int id) {
 		String sql = "";
 
-		sql += String.format("SELECT * 'cateItemName' AS extra__cateItemName ");
+		sql += String.format("SELECT *, 'cateItemName' AS extra__cateItemName ");
 		sql += String.format("FROM article ");
 		sql += String.format("WHERE 1 ");
 		sql += String.format("AND id = %d ", id);

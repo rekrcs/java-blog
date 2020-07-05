@@ -15,6 +15,7 @@ import com.sbs.java.blog.controller.ArticleController;
 import com.sbs.java.blog.controller.Controller;
 import com.sbs.java.blog.controller.HomeController;
 import com.sbs.java.blog.controller.MemberController;
+import com.sbs.java.blog.util.Util;
 
 @WebServlet("/s/*")
 public class DispatcherServlet extends HttpServlet {
@@ -35,7 +36,7 @@ public class DispatcherServlet extends HttpServlet {
 		// DB 커넥터 로딩 성공
 
 		// DB 접속 시작
-		String url = "jdbc:mysql://localhost:3306/blog?serverTimezone=Asia/Seoul&useOldAliasMetadataBehavior=true";
+		String url = "jdbc:mysql://localhost:3306/blog?serverTimezone=Asia/Seoul&useOldAliasMetadataBehavior=true&zeroDateTimeBehavior=convertToNull";
 		String user = "root";
 		String password = "";
 
@@ -75,28 +76,25 @@ public class DispatcherServlet extends HttpServlet {
 					request.getRequestDispatcher(viewPath).forward(request, response);
 				} else if (actionResult.startsWith("plain:")) {
 					response.getWriter().append(actionResult.substring(6));
-				
-					//doWrite 수정필요.
+
+					// doWrite 수정필요.
 				} else if (actionResult.equals("doWrite")) {
 				}
 			} else {
 				response.getWriter().append("존재 하지 않는 게시물 입니다.");
 			}
 		} catch (SQLException e) {
-			System.err.printf("[SQLException 예외, %s]\n", e.getMessage());
-			response.getWriter().append("DB연결 실패");
-			return;
+			Util.printEx("SQL 예외(커넥션 열기)", response, e);
+			
 		} catch (Exception e) {
-			System.err.printf("[기타Exception 예외, %s]\n", e.getMessage());
-			response.getWriter().append("기타 실패");
-			return;
+			Util.printEx("기타 예외", response, e);
+			
 		} finally {
 			if (dbConnection != null) {
 				try {
 					dbConnection.close();
 				} catch (SQLException e) {
-					System.err.printf("[SQLException 예외, %s]\n", e.getMessage());
-					response.getWriter().append("DB연결닫기 실패");
+					Util.printEx("SQL 예외(커넥션 닫기)", response, e);
 				}
 			}
 		}
