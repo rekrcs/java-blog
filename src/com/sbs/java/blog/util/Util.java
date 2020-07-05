@@ -33,24 +33,24 @@ public class Util {
 
 	private static boolean isNum(Object obj) {
 		if (obj == null) {
-			return true;
+			return false;
 		}
 
 		if (obj instanceof Long) {
-			return false;
+			return true;
 		}
 		if (obj instanceof Integer) {
-			return false;
+			return true;
 		}
 		if (obj instanceof String) {
 			try {
 				int num = Integer.parseInt((String) obj);
-				return false;
-			} catch (NumberFormatException e) {
 				return true;
+			} catch (NumberFormatException e) {
+				return false;
 			}
 		}
-		return true;
+		return false;
 	}
 
 	public static int getInt(HttpServletRequest request, String paramName) {

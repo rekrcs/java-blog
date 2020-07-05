@@ -53,7 +53,7 @@ public class ArticleController extends Controller {
 			return "html:id를 입력해 주세요.";
 		}
 
-		if (Util.isNum(request, "id")) {
+		if (Util.isNum(request, "id") == false) {
 			return "html:id를 정수로 입력해 주세요.";
 		}
 
@@ -94,7 +94,10 @@ public class ArticleController extends Controller {
 		if (request.getParameter("page") != null) {
 			page = Integer.parseInt(request.getParameter("page"));
 		}
-
+		
+		String searchKeyword = "";
+		String searchKeyType = "";
+		
 		int itemsInAPage = 5;
 		int totalCount = articleService.getForPrintListArticlesCount(cateItemId);
 		int totalPage = (int) Math.ceil((double) totalCount / itemsInAPage);

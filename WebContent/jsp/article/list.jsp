@@ -18,10 +18,19 @@ int paramPage = (int) request.getAttribute("page");
 	border-radius: 5px;
 }
 </style>
+
+<div class="con search-box">
+	<form action="${pageContext.request.contextPath}/s/article/list">
+		<input type="hidden" name="page" value="1" /> <input type="hidden"
+			name="cateItemId" value="${param.cateItemId}" /> <input
+			type="hidden" name="searchKeywordType" value="title" /> <input
+			type="text" name="searchKeyword" value="${param.searchKeyword}" />
+		<button type="submit">검색</button>
+	</form>
+</div>
 <div class="body-content">
 	<section class="body-section">
 		<%
-
 			String cateName = null;
 		int cateNum = 0;
 		for (Article article : articles) {
@@ -85,14 +94,16 @@ int paramPage = (int) request.getAttribute("page");
  %> <%
  	if (cateItemId == 0) {
  %> <a class="<%=i == paramPage ? "current" : "" %>"
-				href="${pageContext.request.contextPath}/s/article/list?page=<%=i%>"><%=i%></a> <%
- 	}
- %> <%
+				href="${pageContext.request.contextPath}/s/article/list?page=<%=i%>"><%=i%></a>
+				<%
+					}
+				%> <%
  	if (cateItemId != 0) {
  %> <a class="<%=i == paramPage ? "current" : "" %>"
-				href="${pageContext.request.contextPath}/s/article/list?cateItemId=${param.cateItemId}&page=<%=i%>"><%=i%></a> <%
- 	}
- %> <%
+				href="${pageContext.request.contextPath}/s/article/list?cateItemId=${param.cateItemId}&page=<%=i%>"><%=i%></a>
+				<%
+					}
+				%> <%
  	}
  %></span>
 		</div>
