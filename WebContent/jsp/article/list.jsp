@@ -21,12 +21,13 @@ int paramPage = (int) request.getAttribute("page");
 <div class="body-content">
 	<section class="body-section">
 		<%
+
 			String cateName = null;
 		int cateNum = 0;
 		for (Article article : articles) {
 			for (Article article2 : cateNameForArticles) {
 				if (article.getId() == article2.getId()) {
-			cateName = article2.getCateItemName();
+			cateName = article2.getExtra().get("cateItemName") + "";
 			cateNum = article2.getCateItemId();
 			break;
 				}

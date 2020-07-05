@@ -34,23 +34,23 @@ public class HomeController extends Controller {
 	}
 
 	private String doActionSns(HttpServletRequest request, HttpServletResponse response) {
-		return "home/sns";
+		return "home/sns.jsp";
 	}
 
 	private String doActionMain(HttpServletRequest request, HttpServletResponse response) {
 
-		return "home/main";
+		return "home/main.jsp";
 	}
 
 	private String doActionArticles(HttpServletRequest request, HttpServletResponse response) {
 		List<CateItem> cateItems = cateItemService.getCateItems(request, response);
 		request.setAttribute("cateItems", cateItems);
-		return "home/articles";
+		return "home/articles.jsp";
 	}
 
 	private String doActionAboutMe(HttpServletRequest request, HttpServletResponse response) {
 
-		return "home/aboutMe";
+		return "home/aboutMe.jsp";
 	}
 
 }

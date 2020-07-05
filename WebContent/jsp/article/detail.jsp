@@ -1,5 +1,6 @@
 <%@ page import="com.sbs.java.blog.dto.CateItem"%>
 <%@ page import="java.util.List"%>
+
 <%@ page import="com.sbs.java.blog.dto.Article"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -15,33 +16,39 @@
 %>
 <style>
 #viewer1 {
-	width: 800px;
+	width: 100%;
 	margin-left: auto;
 	margin-right: auto;
 }
 
 .forMargin {
 	margin-bottom: 100px;
+	
 }
 
-.previous-next-box {
-	margin: 50px 0;
-	width: 900px;
+.detail-body-container {
+	width: 700px;
 	margin-left: auto;
 	margin-right: auto;
+}
+.previous-next-box {
+	margin: 50px 0;
+	width: 100%;	
  	display: flex;
  	justify-content: space-between;
 }
 
 </style>
+<div class="detail-body-container">
 <header>
 
 	<%
+
 		String cateName = null;
 		int cateNum = 0;
 		for (Article article2 : cateNameForArticles) {
 			if (article.getId() == article2.getId()) {
-				cateName = article2.getCateItemName();
+				cateName = article2.getExtra().get("cateItemName") + "";
 				cateNum = article2.getCateItemId();
 			}
 		}
@@ -98,5 +105,6 @@
 			<i class="fas fa-angle-right"></i></a><%
  	}
  %>
+</div>
 </div>
 <div class="forMargin"></div>

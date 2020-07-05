@@ -57,4 +57,9 @@ public class ArticleService {
 		return articleDao.getCateNameFromCateId();
 	}
 
+	public Article getForPrintArticle(int id) {
+		
+		return articleDao.getForPrintArticle(id);
+	}
+
 }

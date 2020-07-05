@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.sbs.java.blog.dto.Article;
 import com.sbs.java.blog.service.ArticleService;
+import com.sbs.java.blog.util.Util;
 
 public class ArticleController extends Controller {
 	private ArticleService articleService;
@@ -38,31 +39,43 @@ public class ArticleController extends Controller {
 		int cateItemId = Integer.parseInt(request.getParameter("cateItemId"));
 
 		articleService.doWriteArticle(title, body, cateItemId, request, response);
-		return "insert";
+		return "doWrite";
 	}
 
 	private String doActionDetail(HttpServletRequest request, HttpServletResponse response) {
-		int id = Integer.parseInt(request.getParameter("id"));
+		if (Util.empty(request, "id")) {
+			return "plain:id를 입력해 주세요.";
+		}
+
+		if (Util.isNum(request, "id")) {
+			return "plain:id를 정수로 입력해 주세요.";
+		}
+
+		int id = Util.getInt(request, "id");
+//		id = Integer.parseInt(request.getParameter("id"));
 		Article article = articleService.getForDetailFromArticle(id, request, response);
 		request.setAttribute("article", article);
-		
+
 		int firstId = articleService.getFirstIdFromArticle();
 		request.setAttribute("firstId", firstId);
-		
+
 		int lastId = articleService.getLastIdFromArticle();
 		request.setAttribute("lastId", lastId);
-		
+
 		Article articleNext = articleService.getNextArticle(id, article);
 		request.setAttribute("articleNext", articleNext);
-		
+
 		Article articlePrevious = articleService.getPreviousArticle(id, article);
 		request.setAttribute("articlePrevious", articlePrevious);
-		
-		//extra 공부후 수정필요
+
+		// extra 공부후 수정필요
 		List<Article> cateNameForArticles = articleService.getCateNameFromCateId();
 		request.setAttribute("cateNameForArticles", cateNameForArticles);
 		
-		return "article/detail";
+		//추가
+//		Article articlePlus = articleService.getForPrintArticle(id);
+		
+		return "article/detail.jsp";
 	}
 
 	private String doActionList(HttpServletRequest request, HttpServletResponse response) {
@@ -84,14 +97,15 @@ public class ArticleController extends Controller {
 		request.setAttribute("cateItemId", cateItemId);
 		request.setAttribute("page", page);
 
-		List<Article> articles = articleService.getForPrintListArticles(page, cateItemId, itemsInAPage, request, response);
+		List<Article> articles = articleService.getForPrintListArticles(page, cateItemId, itemsInAPage, request,
+				response);
 		request.setAttribute("articles", articles);
-		
-		//extra 공부후 수정필요
+
+		// extra 공부후 수정필요
 		List<Article> cateNameForArticles = articleService.getCateNameFromCateId();
 		request.setAttribute("cateNameForArticles", cateNameForArticles);
-		
-		return "article/list";
+
+		return "article/list.jsp";
 	}
 
 }

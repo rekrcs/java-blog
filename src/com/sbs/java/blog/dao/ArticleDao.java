@@ -152,10 +152,21 @@ public class ArticleDao {
 
 	public List<Article> getCateNameFromCateId() {
 		String sql = "";
-		sql += String.format("SELECT A.*, C.name AS cateItemName ");
+
+		sql += String.format("SELECT A.*, C.name AS extra__cateItemName ");
 		sql += String.format("FROM article AS A ");
 		sql += String.format("INNER JOIN cateItem AS C ");
 		sql += String.format("ON A.cateItemId = C.id ");
+		sql += String.format("WHERE 1 ");
+		sql += String.format("AND disPlayStatus = 1 ");
+		
+		
+		
+//		String sql = "";
+//		sql += String.format("SELECT A.*, C.name AS cateItemName ");
+//		sql += String.format("FROM article AS A ");
+//		sql += String.format("INNER JOIN cateItem AS C ");
+//		sql += String.format("ON A.cateItemId = C.id ");
 
 		List<Map<String, Object>> rows = DBUtil.selectRows(dbConnection, sql);
 		List<Article> cateNameForArticles = new ArrayList<>();
@@ -165,6 +176,18 @@ public class ArticleDao {
 		}
 
 		return cateNameForArticles;
+	}
+
+	public Article getForPrintArticle(int id) {
+		String sql = "";
+
+		sql += String.format("SELECT * 'cateItemName' AS extra__cateItemName ");
+		sql += String.format("FROM article ");
+		sql += String.format("WHERE 1 ");
+		sql += String.format("AND id = %d ", id);
+		sql += String.format("AND disPlayStatus = 1 ");
+
+		return new Article(DBUtil.selectRow(dbConnection, sql));
 	}
 
 }
