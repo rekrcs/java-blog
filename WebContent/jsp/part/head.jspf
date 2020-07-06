@@ -135,6 +135,13 @@ hr {
 	width: 700px;
 }
 
+@media ( max-width :799px) {
+	.list-body>.list-body2-box {
+		width: 100%;
+		margin: 0 10px;
+	}
+}
+
 .list-body2-box>.list-cateName>a {
 	display: inline-block;
 	padding: 5px 20px;
@@ -249,9 +256,9 @@ footer>.list-footer {
 	opacity: 1;
 }
 
-.mobile-side-bar {
+/* .mobile-side-bar {
 	z-index: 1;
-}
+} */
 
 .mobile-top-bar {
 	z-index: 1;

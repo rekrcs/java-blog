@@ -17,17 +17,8 @@ int paramPage = (int) request.getAttribute("page");
 	background-color: #afafaf;
 	border-radius: 5px;
 }
-</style>
 
-<div class="con search-box">
-	<form action="${pageContext.request.contextPath}/s/article/list">
-		<input type="hidden" name="page" value="1" /> <input type="hidden"
-			name="cateItemId" value="${param.cateItemId}" /> <input
-			type="hidden" name="searchKeywordType" value="title" /> <input
-			type="text" name="searchKeyword" value="${param.searchKeyword}" />
-		<button type="submit">검색</button>
-	</form>
-</div>
+</style>
 <div class="body-content">
 	<section class="body-section">
 		<%

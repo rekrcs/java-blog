@@ -500,7 +500,8 @@ label[for] {
 	visibility: hidden;
 	opacity: 0;
 	transition: visibility 1s, opacity 0.5s;
-	z-index: 10;
+ 	z-index: 1;
+ 	height: 10%;
 }
 
 .mobile-side-bar .menu-box-1 {
@@ -509,6 +510,7 @@ label[for] {
 	border-bottom:1px solid; */
 	border-top: 1px solid rgba(0, 0, 0, .2);
 	border-bottom: 1px solid rgba(0, 0, 0, .2);
+	
 }
 
 .mobile-side-bar.active {
