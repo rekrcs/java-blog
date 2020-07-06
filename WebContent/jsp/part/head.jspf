@@ -259,7 +259,6 @@ footer>.list-footer {
 /* .mobile-side-bar {
 	z-index: 1;
 } */
-
 .mobile-top-bar {
 	z-index: 1;
 	background-color: white;
@@ -273,7 +272,8 @@ footer>.list-footer {
 	<header class="header">
 		<div class="flex flex-jc-c height-100p forTitle flex"
 			style="margin-bottom: 20px;">
-			<a class="title animate__animated animate__fadeInDown height-100p"
+			<a style="padding: 0 40px"
+				class="title animate__animated animate__fadeInDown height-100p"
 				href="${pageContext.request.contextPath}/s/article/list?page=1">
 				<i class="fas fa-rocket border"></i> 기록하는 블로그
 			</a>
