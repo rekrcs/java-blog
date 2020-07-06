@@ -302,8 +302,7 @@ footer>.list-footer {
 							<ul>
 								<li><a href="https://github.com/rekrcs" target="_blank"
 									class="block">GITHUB</a></li>
-								<li><a href="https://github.com/rekrcs" target="_blank"
-									class="block">INSTA</a></li>
+								<li><a href="${pageContext.request.contextPath}/s/home/sns">INSTA</a></li>
 							</ul></li>
 					</ul>
 				</nav>
@@ -339,8 +338,7 @@ footer>.list-footer {
 					<ul>
 						<li><a href="https://github.com/rekrcs" target="_blank"
 							class="block">GITHUB</a></li>
-						<li><a href="https://github.com/rekrcs" target="_blank"
-							class="block">INSTA</a></li>
+						<li><a href="${pageContext.request.contextPath}/s/home/sns">INSTA</a></li>
 					</ul></li>
 			</ul>
 		</nav>
