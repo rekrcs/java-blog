@@ -76,14 +76,23 @@
 			</span>
 		</div>
 	</header>
-	<div id="origin1">
+<script type="text/x-template" id="origin1">	
 작성일 : <%=article.getRegDate()%>
 수정일 : <%=article.getUpdateDate()%>
 ### 번호 : <%=article.getId()%>
 ## 내용
-<%=article.getBody()%>
-	</div>
+<%=article.getBody()%></script>
+
 	<div id="viewer1"></div>
+	<script>
+		var editor1__initialValue = $('#origin1').html();
+		var editor1 = new toastui.Editor({
+			el : document.querySelector('#viewer1'),
+			initialValue : editor1__initialValue,
+			viewer : true,
+			plugins : [ toastui.Editor.plugin.codeSyntaxHighlight, youtubePlugin, replPlugin, codepenPlugin ]
+		});
+	</script>
 	<div class="previous-next-box">
 		<%
 			if (article.getId() == firstId) {

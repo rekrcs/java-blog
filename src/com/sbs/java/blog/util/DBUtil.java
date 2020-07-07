@@ -17,10 +17,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.sbs.java.blog.dto.Article;
+import com.sbs.java.blog.exception.SQLErrorException;
 
 public class DBUtil {
 	private HttpServletRequest request;
 	private HttpServletResponse response;
+
 	public DBUtil(HttpServletRequest request, HttpServletResponse response) {
 		this.request = request;
 		this.response = response;
@@ -60,23 +62,24 @@ public class DBUtil {
 				rows.add(row);
 			}
 		} catch (SQLException e) {
-			Util.printEx("SQL 예외, SQL : " + sql, response, e);
+			throw new SQLErrorException("SQL 예외, SQL : " + sql);
 		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					throw new SQLErrorException("SQL 예외, rs 닫기 " + sql);
+				}
+			}
 			if (stmt != null) {
 				try {
 					stmt.close();
 				} catch (SQLException e) {
 					Util.printEx("SQL 예외, stmt 닫기 ", response, e);
+					throw new SQLErrorException("SQL 예외, stmt 닫기 " + sql);
 				}
 			}
 
-			if (rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException e) {
-					Util.printEx("SQL 예외, rs 닫기 ", response, e);
-				}
-			}
 		}
 
 		return rows;
@@ -92,7 +95,7 @@ public class DBUtil {
 		return rows.get(0);
 	}
 
-	public void insert(Connection connection, String sql, HttpServletResponse response) {
+	public void insert(Connection connection, String sql, HttpServletResponse response) throws SQLErrorException {
 		Statement stmt = null;
 
 		try {
@@ -106,13 +109,13 @@ public class DBUtil {
 			}
 
 		} catch (SQLException e) {
-			Util.printEx("SQL 예외, SQL : " + sql, response, e);
+			Util.printEx("SQL 예외, SQL", response, e);
 		} finally {
 			if (connection != null) {
 				try {
 					connection.close();
 				} catch (SQLException e) {
-					Util.printEx("SQL 예외, connection 닫기 ", response, e);
+					Util.printEx("SQL 예외(커넥션 닫기)", response, e);
 				}
 			}
 
@@ -120,7 +123,7 @@ public class DBUtil {
 				try {
 					stmt.close();
 				} catch (SQLException e) {
-					Util.printEx("SQL 예외, stmt 닫기 ", response, e);
+					Util.printEx("SQL 예외, stmt 닫기", response, e);
 				}
 			}
 		}
@@ -169,23 +172,23 @@ public class DBUtil {
 				oneId = rs.getInt(1);
 			}
 		} catch (SQLException e) {
-			Util.printEx("SQL 예외, SQL : " + sql, response, e);
+			throw new SQLErrorException("SQL 예외, SQL : " + sql);
 		} finally {
-			if (stmt != null) {
-				try {
-					stmt.close();
-				} catch (SQLException e) {
-					Util.printEx("SQL 예외, stmt 닫기 ", response, e);
-				}
-			}
-
 			if (rs != null) {
 				try {
 					rs.close();
 				} catch (SQLException e) {
-					Util.printEx("SQL 예외, rs 닫기 ", response, e);
+					throw new SQLErrorException("SQL 예외, rs 닫기 " + sql);
 				}
 			}
+			if (stmt != null) {
+				try {
+					stmt.close();
+				} catch (SQLException e) {
+					throw new SQLErrorException("SQL 예외, stmt 닫기 " + sql);
+				}
+			}
+
 		}
 
 		return oneId;

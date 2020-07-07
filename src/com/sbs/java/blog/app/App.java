@@ -13,6 +13,7 @@ import com.sbs.java.blog.controller.ArticleController;
 import com.sbs.java.blog.controller.Controller;
 import com.sbs.java.blog.controller.HomeController;
 import com.sbs.java.blog.controller.MemberController;
+import com.sbs.java.blog.exception.SQLErrorException;
 import com.sbs.java.blog.util.Util;
 
 public class App {
@@ -39,7 +40,7 @@ public class App {
 	}
 
 	private String getDbUrl() {
-		return "jdbc:mysql://site33.iu.gy:3306/site33?serverTimezone=Asia/Seoul&useOldAliasMetadataBehavior=true&zeroDateTimeBehavior=convertToNull";
+		return "jdbc:mysql://localhost:3306/blog?serverTimezone=Asia/Seoul&useOldAliasMetadataBehavior=true&zeroDateTimeBehavior=convertToNull";
 	}
 
 	public void start() throws IOException {
@@ -62,7 +63,10 @@ public class App {
 		} catch (SQLException e) {
 			Util.printEx("SQL 예외(커넥션 열기)", response, e);
 
+		} catch (SQLErrorException e) {
+			Util.printEx("기타 예외", response, e);
 		} catch (Exception e) {
+
 			Util.printEx("기타 예외", response, e);
 
 		} finally {
@@ -112,7 +116,7 @@ public class App {
 				String viewPath = "/jsp/" + actionResult;
 				request.getRequestDispatcher(viewPath).forward(request, response);
 			} else if (actionResult.startsWith("html:")) {
-				response.getWriter().append(actionResult.substring(6));
+				response.getWriter().append(actionResult.substring(5));
 
 				// doWrite 수정필요.
 			} else if (actionResult.equals("doWrite")) {
@@ -125,13 +129,13 @@ public class App {
 
 	}
 
-	private String getDbPassWord() {
-
-		return "sbs123414";
+	private String getDbId() {
+		return "root";
 	}
 
-	private String getDbId() {
-		return "site33";
+	private String getDbPassWord() {
+
+		return "";
 	}
 
 }
