@@ -20,15 +20,7 @@ import com.sbs.java.blog.dto.Article;
 import com.sbs.java.blog.exception.SQLErrorException;
 
 public class DBUtil {
-	private HttpServletRequest request;
-	private HttpServletResponse response;
-
-	public DBUtil(HttpServletRequest request, HttpServletResponse response) {
-		this.request = request;
-		this.response = response;
-	}
-
-	public List<Map<String, Object>> selectRows(Connection connection, String sql) {
+	public static List<Map<String, Object>> selectRows(Connection connection, String sql) {
 		List<Map<String, Object>> rows = new ArrayList<>();
 
 		Statement stmt = null;
@@ -75,7 +67,6 @@ public class DBUtil {
 				try {
 					stmt.close();
 				} catch (SQLException e) {
-					Util.printEx("SQL 예외, stmt 닫기 ", response, e);
 					throw new SQLErrorException("SQL 예외, stmt 닫기 " + sql);
 				}
 			}
@@ -85,7 +76,7 @@ public class DBUtil {
 		return rows;
 	}
 
-	public Map<String, Object> selectRow(Connection connection, String sql) {
+	public static Map<String, Object> selectRow(Connection connection, String sql) {
 		List<Map<String, Object>> rows = selectRows(connection, sql);
 
 		if (rows.size() == 0) {
@@ -95,7 +86,7 @@ public class DBUtil {
 		return rows.get(0);
 	}
 
-	public void insert(Connection connection, String sql, HttpServletResponse response) throws SQLErrorException {
+	public static void insert(Connection connection, String sql, HttpServletResponse response) throws SQLErrorException {
 		Statement stmt = null;
 
 		try {
@@ -129,12 +120,12 @@ public class DBUtil {
 		}
 	}
 
-	public Article getArticlePrevious(Connection connection, String sql) {
+	public static Article getArticlePrevious(Connection connection, String sql) {
 
 		return null;
 	}
 
-	public int selectRowIntValue(Connection connection, String sql) {
+	public static int selectRowIntValue(Connection connection, String sql) {
 		Map<String, Object> row = selectRow(connection, sql);
 
 		for (String key : row.keySet()) {
@@ -143,7 +134,7 @@ public class DBUtil {
 		return -1;
 	}
 
-	public String selectRowStringValue(Connection connection, String sql) {
+	public static String selectRowStringValue(Connection connection, String sql) {
 		Map<String, Object> row = selectRow(connection, sql);
 
 		for (String key : row.keySet()) {
@@ -152,7 +143,7 @@ public class DBUtil {
 		return "";
 	}
 
-	public boolean selectRowBooleanValue(Connection connection, String sql) {
+	public static boolean selectRowBooleanValue(Connection connection, String sql) {
 		Map<String, Object> row = selectRow(connection, sql);
 
 		for (String key : row.keySet()) {
@@ -161,7 +152,7 @@ public class DBUtil {
 		return false;
 	}
 
-	public int getOneId(Connection connection, String sql) {
+	public static int getOneId(Connection connection, String sql) {
 		Statement stmt = null;
 		ResultSet rs = null;
 		int oneId = -1;

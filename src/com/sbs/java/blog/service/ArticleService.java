@@ -14,9 +14,8 @@ public class ArticleService extends Service {
 
 	private ArticleDao articleDao;
 
-	public ArticleService(Connection dbConnection, HttpServletRequest request, HttpServletResponse response) {
-		super(request, response);
-		this.articleDao = new ArticleDao(dbConnection, request, response);
+	public ArticleService(Connection dbConnection) {
+		this.articleDao = new ArticleDao(dbConnection);
 	}
 
 	public List<Article> getForPrintListArticles(int page, int cateItemId, int itemsInAPage, HttpServletRequest request,

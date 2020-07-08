@@ -14,12 +14,9 @@ import com.sbs.java.blog.util.DBUtil;
 
 public class ArticleDao extends Dao {
 	private Connection dbConnection;
-	private DBUtil dbUtil;
 
-	public ArticleDao(Connection dbConnection, HttpServletRequest request, HttpServletResponse response) {
-		super(request, response);
+	public ArticleDao(Connection dbConnection) {
 		this.dbConnection = dbConnection;
-		dbUtil = new DBUtil(request, response);
 	}
 
 	public List<Article> getForPrintListArticles(int page, int cateItemId, int itemsInAPage, HttpServletRequest request,
@@ -42,7 +39,7 @@ public class ArticleDao extends Dao {
 		sql += String.format("ORDER BY id DESC ");
 		sql += String.format("LIMIT %d, %d ", limitFrom, itemsInAPage);
 
-		List<Map<String, Object>> rows = dbUtil.selectRows(dbConnection, sql);
+		List<Map<String, Object>> rows = DBUtil.selectRows(dbConnection, sql);
 		List<Article> articles = new ArrayList<>();
 
 		for (Map<String, Object> row : rows) {
@@ -61,7 +58,7 @@ public class ArticleDao extends Dao {
 		sql += String.format("FROM article ");
 		sql += String.format("WHERE id = %d", id);
 
-		Map<String, Object> row = dbUtil.selectRow(dbConnection, sql);
+		Map<String, Object> row = DBUtil.selectRow(dbConnection, sql);
 
 		Article article = new Article(row);
 
@@ -79,7 +76,7 @@ public class ArticleDao extends Dao {
 		sql += String.format(", title = '%s'", title);
 		sql += String.format(", body = '%s'", body);
 
-		dbUtil.insert(dbConnection, sql, response);
+		DBUtil.insert(dbConnection, sql, response);
 
 	}
 
@@ -97,7 +94,7 @@ public class ArticleDao extends Dao {
 			sql += String.format(" AND title LIKE CONCAT('%%', '%s', '%%') ", searchKeyword);
 		}
 		
-		int totalCount = dbUtil.selectRowIntValue(dbConnection, sql);
+		int totalCount = DBUtil.selectRowIntValue(dbConnection, sql);
 //		System.out.println("getForPrintListArticlesCount : " + sql);
 //		System.out.println("cateItemId : " + cateItemId);
 		return totalCount;
@@ -110,7 +107,7 @@ public class ArticleDao extends Dao {
 		sql += String.format("ORDER BY id ASC ");
 		sql += String.format("LIMIT 1");
 
-		int firstId = dbUtil.selectRowIntValue(dbConnection, sql);
+		int firstId = DBUtil.selectRowIntValue(dbConnection, sql);
 
 		return firstId;
 	}
@@ -122,7 +119,7 @@ public class ArticleDao extends Dao {
 		sql += String.format("ORDER BY id DESC ");
 		sql += String.format("LIMIT 1");
 
-		int lastId = dbUtil.selectRowIntValue(dbConnection, sql);
+		int lastId = DBUtil.selectRowIntValue(dbConnection, sql);
 
 		return lastId;
 	}
@@ -136,7 +133,7 @@ public class ArticleDao extends Dao {
 		sql += String.format(" LIMIT 1");
 
 		Article articleNext = null;
-		Map<String, Object> row = dbUtil.selectRow(dbConnection, sql);
+		Map<String, Object> row = DBUtil.selectRow(dbConnection, sql);
 		if (row.isEmpty()) {
 			articleNext = article;
 		} else {
@@ -156,7 +153,7 @@ public class ArticleDao extends Dao {
 		sql += String.format(" ORDER BY id DESC");
 		sql += String.format(" LIMIT 1");
 
-		Map<String, Object> row = dbUtil.selectRow(dbConnection, sql);
+		Map<String, Object> row = DBUtil.selectRow(dbConnection, sql);
 		if (row.isEmpty()) {
 			articlePrevious = article;
 		} else {
@@ -182,7 +179,7 @@ public class ArticleDao extends Dao {
 //		sql += String.format("INNER JOIN cateItem AS C ");
 //		sql += String.format("ON A.cateItemId = C.id ");
 
-		List<Map<String, Object>> rows = dbUtil.selectRows(dbConnection, sql);
+		List<Map<String, Object>> rows = DBUtil.selectRows(dbConnection, sql);
 		List<Article> cateNameForArticles = new ArrayList<>();
 
 		for (Map<String, Object> row : rows) {
@@ -201,7 +198,7 @@ public class ArticleDao extends Dao {
 		sql += String.format("AND id = %d ", id);
 		sql += String.format("AND disPlayStatus = 1 ");
 
-		return new Article(dbUtil.selectRow(dbConnection, sql));
+		return new Article(DBUtil.selectRow(dbConnection, sql));
 	}
 
 	public List<CateItem> getForPrintCateItems() {
@@ -211,7 +208,7 @@ public class ArticleDao extends Dao {
 		sql += String.format("WHTER 1 ");
 		sql += String.format("ORDER BY id ASC ");
 
-		List<Map<String, Object>> rows = dbUtil.selectRows(dbConnection, sql);
+		List<Map<String, Object>> rows = DBUtil.selectRows(dbConnection, sql);
 		List<CateItem> cateItems = new ArrayList<>();
 
 		for (Map<String, Object> row : rows) {
@@ -226,7 +223,7 @@ public class ArticleDao extends Dao {
 		sql += String.format("SELECT * ");
 		sql += String.format("FROM cateItem ");
 
-		List<Map<String, Object>> rows = dbUtil.selectRows(dbConnection, sql);
+		List<Map<String, Object>> rows = DBUtil.selectRows(dbConnection, sql);
 		List<CateItem> cateItems = new ArrayList<>();
 
 		for (Map<String, Object> row : rows) {

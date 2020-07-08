@@ -1,15 +1,12 @@
 package com.sbs.java.blog.controller;
 
-import java.io.IOException;
 import java.sql.Connection;
 import java.util.List;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.sbs.java.blog.dto.Article;
-import com.sbs.java.blog.service.ArticleService;
 import com.sbs.java.blog.util.Util;
 
 public class ArticleController extends Controller {
@@ -34,9 +31,15 @@ public class ArticleController extends Controller {
 			return doActionDetail(request, response);
 		case "doWrite":
 			return doActionDoWrite(request, response);
+		case "Write":
+			return doActionWrite(request, response);
 		}
 		return "";
 
+	}
+
+	private String doActionWrite(HttpServletRequest request, HttpServletResponse response) {
+		return "article/write.jsp";
 	}
 
 	private String doActionDoWrite(HttpServletRequest request, HttpServletResponse response) {

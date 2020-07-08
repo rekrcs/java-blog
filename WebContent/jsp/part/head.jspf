@@ -130,7 +130,6 @@ hr {
 	margin: 0 auto;
 	width: 700px;
 } */
-
 .list-body>.list-body2-box {
 	margin: 0 auto;
 	width: 700px;
@@ -290,6 +289,10 @@ footer>.list-footer {
 							class="block height-100p" style="text-align: center;"><i
 								class="fas fa-home"></i><br />Home</a></li>
 						<li><a
+							href="${pageContext.request.contextPath}/s/article/write"
+							class="block height-100p" style="text-align: center;"><i
+								class="fas fa-edit"></i><br />Write</a></li>
+						<li><a
 							href="${pageContext.request.contextPath}/s/home/articles"
 							class="block height-100p" style="text-align: center;"><i
 								class="fab fa-readme"></i><br />Articles</a></li>
@@ -325,6 +328,10 @@ footer>.list-footer {
 				<li><a
 					href="${pageContext.request.contextPath}/s/article/list?page=1"
 					class="block"><i class="fas fa-home"></i> Home
+						<hr></hr></a></li>
+				<li><a
+					href="${pageContext.request.contextPath}/s/article/write"
+					class="block"><i class="fas fa-edit"></i> Write
 						<hr></hr></a></li>
 				<li><a
 					href="${pageContext.request.contextPath}/s/home/articles"
