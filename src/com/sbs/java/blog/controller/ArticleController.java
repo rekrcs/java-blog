@@ -85,41 +85,41 @@ public class ArticleController extends Controller {
 	}
 
 	private String doActionList(HttpServletRequest request, HttpServletResponse response) {
-		int cateItemId = 0;
-		if (request.getParameter("cateItemId") != null) {
-			cateItemId = Integer.parseInt(request.getParameter("cateItemId"));
-		}
-
-		int page = 1;
-		if (request.getParameter("page") != null) {
-			page = Integer.parseInt(request.getParameter("page"));
-		}
-//		int page = 1;
-//		
-//		if (!Util.empty(request, "page") && Util.isNum(request, "page")) {
-//			page = Util.getInt(request, "page");
-//		}
-//		
 //		int cateItemId = 0;
-//		
-//		if (!Util.empty(request, "cateItemId") && Util.isNum(request, "cateItemId")) {
-//			page = Util.getInt(request, "cateItemId");
+//		if (request.getParameter("cateItemId") != null) {
+//			cateItemId = Integer.parseInt(request.getParameter("cateItemId"));
 //		}
-
-	String searchKeywordType = "";
+//
+//		int page = 1;
+//		if (request.getParameter("page") != null) {
+//			page = Integer.parseInt(request.getParameter("page"));
+//		}
 		
+		int page = 1;
+
+		if (!Util.empty(request, "page") && Util.isNum(request, "page")) {
+			page = Util.getInt(request, "page");
+		}
+		
+		
+		int cateItemId = 0;
+
+		if (!Util.empty(request, "cateItemId") && Util.isNum(request, "cateItemId")) {
+			cateItemId = Util.getInt(request, "cateItemId");
+		}
+
+		String searchKeywordType = "";
+
 		if (!Util.empty(request, "searchKeywordType")) {
 			searchKeywordType = Util.getString(request, "searchKeywordType");
 		}
-		
+
 		String searchKeyword = "";
-		
+
 		if (!Util.empty(request, "searchKeyword")) {
 			searchKeyword = Util.getString(request, "searchKeyword");
 		}
-		
-	
-		
+
 		int itemsInAPage = 5;
 		int totalCount = articleService.getForPrintListArticlesCount(cateItemId, searchKeywordType, searchKeyword);
 		int totalPage = (int) Math.ceil((double) totalCount / itemsInAPage);

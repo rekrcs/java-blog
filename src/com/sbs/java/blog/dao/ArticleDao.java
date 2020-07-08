@@ -48,7 +48,8 @@ public class ArticleDao extends Dao {
 		for (Map<String, Object> row : rows) {
 			articles.add(new Article(row));
 		}
-
+//		System.out.println("getForPrintListArticles : " + sql);
+//		System.out.println("cateItemId : " + cateItemId);
 		return articles;
 
 	}
@@ -97,7 +98,8 @@ public class ArticleDao extends Dao {
 		}
 		
 		int totalCount = dbUtil.selectRowIntValue(dbConnection, sql);
-
+//		System.out.println("getForPrintListArticlesCount : " + sql);
+//		System.out.println("cateItemId : " + cateItemId);
 		return totalCount;
 	}
 
