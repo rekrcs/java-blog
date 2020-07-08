@@ -185,7 +185,7 @@ function getUrlParams(url) {
 }
 // lib 끝
 
-$(function() {
+/*$(function() {
 	console.clear();
 	var editor1__initialValue = $('#origin1').html();
 	var editor1 = new toastui.Editor({
@@ -194,4 +194,4 @@ $(function() {
 		viewer : true,
 		plugins : [ toastui.Editor.plugin.codeSyntaxHighlight, youtubePlugin, replPlugin, codepenPlugin ]
 	});
-});
+});*/
