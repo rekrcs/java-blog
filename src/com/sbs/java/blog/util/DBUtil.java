@@ -86,27 +86,29 @@ public class DBUtil {
 		return rows.get(0);
 	}
 
-	public static void insert(Connection connection, String sql, HttpServletResponse response) throws SQLErrorException {
+	public static int insert(Connection dbConn, String sql) {
+		int id = -1;
+
 		Statement stmt = null;
+		ResultSet rs = null;
 
 		try {
-			stmt = connection.createStatement();
-			stmt.executeUpdate(sql);
-			int affectedRows = stmt.executeUpdate(sql);
-			try {
-				response.getWriter().append(affectedRows + "개의 데이터가 추가되었습니다.");
-			} catch (IOException e) {
-				System.err.printf("[게시물추가 에러] : %s\n", e.getMessage());
+			stmt = dbConn.createStatement();
+			stmt.execute(sql, Statement.RETURN_GENERATED_KEYS);
+			rs = stmt.getGeneratedKeys();
+
+			if (rs.next()) {
+				id = rs.getInt(1);
 			}
 
 		} catch (SQLException e) {
-			Util.printEx("SQL 예외, SQL", response, e);
+			throw new SQLErrorException("SQL 예외, SQL : " + sql);
 		} finally {
-			if (connection != null) {
+			if (rs != null) {
 				try {
-					connection.close();
+					rs.close();
 				} catch (SQLException e) {
-					Util.printEx("SQL 예외(커넥션 닫기)", response, e);
+					throw new SQLErrorException("SQL 예외, rs 닫기" + sql);
 				}
 			}
 
@@ -114,10 +116,12 @@ public class DBUtil {
 				try {
 					stmt.close();
 				} catch (SQLException e) {
-					Util.printEx("SQL 예외, stmt 닫기", response, e);
+					throw new SQLErrorException("SQL 예외, stmt 닫기" + sql);
 				}
 			}
+
 		}
+		return id;
 	}
 
 	public static Article getArticlePrevious(Connection connection, String sql) {

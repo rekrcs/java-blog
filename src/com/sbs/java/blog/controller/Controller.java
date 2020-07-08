@@ -28,9 +28,10 @@ public abstract class Controller {
 
 	public void beforeAction() {
 		// 액션 전 실행
-		// 이 메서드는 모든 컽트롤러의 모든 액션이 실행되기 전에 실행된다.
-//		List<CateItem> cateItems = articleService.getForPrintCateItems();
-//		request.setAttribute("cateItems", cateItems);
+		// 이 메서드는 모든 컨트롤러의 모든 액션이 실행되기 전에 실행된다.
+		List<CateItem> cateItems = articleService.getForPrintCateItems();
+		
+		request.setAttribute("cateItems", cateItems);
 	}
 
 	public void afterAction() {
@@ -39,10 +40,13 @@ public abstract class Controller {
 
 	public abstract String doAction();
 
-	public String excutedoAction() {
+
+	public String executeAction() {
 		beforeAction();
 		String rs = doAction();
 		afterAction();
+
 		return rs;
 	}
+
 }

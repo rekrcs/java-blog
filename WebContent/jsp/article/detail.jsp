@@ -1,4 +1,3 @@
-<%@ page import="com.sbs.java.blog.dto.CateItem"%>
 <%@ page import="java.util.List"%>
 
 <%@ page import="com.sbs.java.blog.dto.Article"%>
@@ -12,7 +11,6 @@
 	Article articleNext = (Article) request.getAttribute("articleNext");
 	int firstId = (int) request.getAttribute("firstId");
 	int lastId = (int) request.getAttribute("lastId");
-	List<CateItem> cateItems = (List<CateItem>) request.getAttribute("cateItems");
 %>
 <style>
 #viewer1 {

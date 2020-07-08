@@ -10,6 +10,7 @@
 	int totalPage = (int) request.getAttribute("totalPage");
 	int cateItemId = (int) request.getAttribute("cateItemId");
 	int paramPage = (int) request.getAttribute("page");
+	String cateItemName = (String)request.getAttribute("cateItemName");
 %>
 
 <style>
@@ -18,6 +19,9 @@
 	border-radius: 5px;
 }
 </style>
+<h1 class="con">
+	<%=cateItemName%>
+</h1>
 <div class="body-content">
 	<section class="body-section">
 </div>

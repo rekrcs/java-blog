@@ -18,19 +18,13 @@ public class ArticleService extends Service {
 		this.articleDao = new ArticleDao(dbConnection);
 	}
 
-	public List<Article> getForPrintListArticles(int page, int cateItemId, int itemsInAPage, HttpServletRequest request,
-			HttpServletResponse response, String searchKeywordType, String searchKeyword) {
-		return articleDao.getForPrintListArticles(page, cateItemId, itemsInAPage, request, response, searchKeywordType, searchKeyword);
+	public List<Article> getForPrintListArticles(int page, int cateItemId, int itemsInAPage, String searchKeywordType,
+			String searchKeyword) {
+		return articleDao.getForPrintListArticles(page, cateItemId, itemsInAPage, searchKeywordType, searchKeyword);
 	}
 
 	public Article getForDetailFromArticle(int id, HttpServletRequest request, HttpServletResponse response) {
 		return articleDao.getForDetailFromArticle(id, request, response);
-	}
-
-	public void doWriteArticle(String title, String body, int cateItemId, HttpServletRequest request,
-			HttpServletResponse response) {
-		articleDao.doWriteArticle(title, body, cateItemId, request, response);
-
 	}
 
 	public int getForPrintListArticlesCount(int cateItemId, String searchKeywordType, String searchKeyword) {
@@ -69,6 +63,14 @@ public class ArticleService extends Service {
 
 	public List<CateItem> getCateItems(HttpServletRequest request, HttpServletResponse response) {
 		return articleDao.getCateItems(request, response);
+	}
+
+	public CateItem getCateItem(int cateItemId) {
+		return articleDao.getCateItem(cateItemId);
+	}
+
+	public int write(int cateItemId, String title, String body) {
+		return articleDao.write(cateItemId, title, body);
 	}
 
 }

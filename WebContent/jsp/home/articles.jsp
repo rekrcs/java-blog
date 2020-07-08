@@ -4,9 +4,6 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="/jsp/part/head.jspf"%>
 
-<%
-	List<CateItem> cateItems = (List<CateItem>) request.getAttribute("cateItems");
-%>
 <style>
 .cateItem-container {
 	padding-top: 40px;

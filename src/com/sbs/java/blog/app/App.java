@@ -17,12 +17,12 @@ import com.sbs.java.blog.exception.SQLErrorException;
 import com.sbs.java.blog.util.Util;
 
 public class App {
-	HttpServletRequest request;
-	HttpServletResponse response;
+	private HttpServletRequest req;
+	private HttpServletResponse resp;
 
-	public App(HttpServletRequest request, HttpServletResponse response) {
-		this.request = request;
-		this.response = response;
+	public App(HttpServletRequest req, HttpServletResponse resp) {
+		this.req = req;
+		this.resp = resp;
 	}
 
 	private void loadDbDriver() throws IOException {
@@ -33,7 +33,7 @@ public class App {
 			Class.forName(driverName);
 		} catch (ClassNotFoundException e) {
 			System.err.printf("[ClassNotFoundException 예외, %s]\n", e.getMessage());
-			response.getWriter().append("DB 드라이버 클래스 로딩 실패");
+			resp.getWriter().append("DB 드라이버 클래스 로딩 실패");
 			return;
 		}
 		// DB 커넥터 로딩 성공
@@ -43,51 +43,47 @@ public class App {
 		return "jdbc:mysql://localhost:3306/blog?serverTimezone=Asia/Seoul&useOldAliasMetadataBehavior=true&zeroDateTimeBehavior=convertToNull";
 	}
 
-	public void start() throws IOException {
+	public void start() throws ServletException, IOException {
 		// DB 드라이버 로딩
 		loadDbDriver();
 
-		// DB 접속 정보 세팅
+		// DB 접속정보 세팅
 		String url = getDbUrl();
 		String user = getDbId();
-		String password = getDbPassWord();
+		String password = getDbPassword();
 
-		Connection dbConnection = null;
+		Connection dbConn = null;
 
 		try {
 			// DB 접속 성공
-			dbConnection = DriverManager.getConnection(url, user, password);
+			dbConn = DriverManager.getConnection(url, user, password);
 
 			// 올바른 컨트롤러로 라우팅
-			route(request, response, dbConnection);
+			route(dbConn, req, resp);
 		} catch (SQLException e) {
-			Util.printEx("SQL 예외(커넥션 열기)", response, e);
-
+			Util.printEx("SQL 예외(커넥션 열기)", resp, e);
 		} catch (SQLErrorException e) {
-			Util.printEx("기타 예외", response, e);
+			Util.printEx(e.getMessage(), resp, e);
 		} catch (Exception e) {
-
-			Util.printEx("기타 예외", response, e);
-
+			Util.printEx("기타 예외", resp, e);
 		} finally {
-			if (dbConnection != null) {
+			if (dbConn != null) {
 				try {
-					dbConnection.close();
+					dbConn.close();
 				} catch (SQLException e) {
-					Util.printEx("SQL 예외(커넥션 닫기)", response, e);
+					Util.printEx("SQL 예외(커넥션 닫기)", resp, e);
 				}
 			}
 		}
 
 	}
 
-	private void route(HttpServletRequest request, HttpServletResponse response, Connection dbConnection)
+	private void route(Connection dbConn, HttpServletRequest req, HttpServletResponse resp)
 			throws IOException, ServletException {
-		response.setContentType("text/html; charset=UTF-8");
+		resp.setContentType("text/html; charset=UTF-8");
 
-		String contextPath = request.getContextPath();
-		String requestURI = request.getRequestURI();
-
+		String contextPath = req.getContextPath();
+		String requestURI = req.getRequestURI();
 		String actionStr = requestURI.replace(contextPath + "/s/", "");
 		String[] actionStrBits = actionStr.split("/");
 
@@ -98,43 +94,38 @@ public class App {
 
 		switch (controllerName) {
 		case "article":
-			controller = new ArticleController(dbConnection, actionMethodName, request, response);
+			controller = new ArticleController(dbConn, actionMethodName, req, resp);
 			break;
 		case "member":
-			controller = new MemberController(dbConnection, actionMethodName, request, response);
+			controller = new MemberController(dbConn, actionMethodName, req, resp);
 			break;
 		case "home":
-			controller = new HomeController(dbConnection, actionMethodName, request, response);
+			controller = new HomeController(dbConn, actionMethodName, req, resp);
 			break;
 		}
-		if (controllerName != null) {
-			String actionResult = controller.excutedoAction();
 
+		if (controller != null) {
+			String actionResult = controller.executeAction();
 			if (actionResult.equals("")) {
-				response.getWriter().append("액션의 결과가 없습니다.");
+				resp.getWriter().append("액션의 결과가 없습니다.");
 			} else if (actionResult.endsWith(".jsp")) {
 				String viewPath = "/jsp/" + actionResult;
-				request.getRequestDispatcher(viewPath).forward(request, response);
+				req.getRequestDispatcher(viewPath).forward(req, resp);
 			} else if (actionResult.startsWith("html:")) {
-				response.getWriter().append(actionResult.substring(5));
-
-				// doWrite 수정필요.
-			} else if (actionResult.equals("doWrite")) {
+				resp.getWriter().append(actionResult.substring(5));
 			} else {
-				response.getWriter().append("처리 할 수 없는 액션 결과 입니다.");
+				resp.getWriter().append("처리할 수 없는 액션결과입니다.");
 			}
 		} else {
-			response.getWriter().append("존재 하지 않는 게시물 입니다.");
+			resp.getWriter().append("존재하지 않는 페이지 입니다.");
 		}
-
 	}
 
 	private String getDbId() {
 		return "root";
 	}
 
-	private String getDbPassWord() {
-
+	private String getDbPassword() {
 		return "";
 	}
 

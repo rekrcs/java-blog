@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.sbs.java.blog.dto.Article;
+import com.sbs.java.blog.dto.CateItem;
 import com.sbs.java.blog.util.Util;
 
 public class ArticleController extends Controller {
@@ -31,7 +32,7 @@ public class ArticleController extends Controller {
 			return doActionDetail(request, response);
 		case "doWrite":
 			return doActionDoWrite(request, response);
-		case "Write":
+		case "write":
 			return doActionWrite(request, response);
 		}
 		return "";
@@ -45,10 +46,11 @@ public class ArticleController extends Controller {
 	private String doActionDoWrite(HttpServletRequest request, HttpServletResponse response) {
 		String title = request.getParameter("title");
 		String body = request.getParameter("body");
-		int cateItemId = Integer.parseInt(request.getParameter("cateItemId"));
+		int cateItemId = Util.getInt(request, "cateItemId");
 
-		articleService.doWriteArticle(title, body, cateItemId, request, response);
-		return "doWrite";
+		int id = articleService.write(cateItemId, title, body);
+
+		return "html:<script> alert('" + id + "번 게시물이 생성되었습니다.'); location.replace('list'); </script>";
 	}
 
 	private String doActionDetail(HttpServletRequest request, HttpServletResponse response) {
@@ -88,28 +90,26 @@ public class ArticleController extends Controller {
 	}
 
 	private String doActionList(HttpServletRequest request, HttpServletResponse response) {
-//		int cateItemId = 0;
-//		if (request.getParameter("cateItemId") != null) {
-//			cateItemId = Integer.parseInt(request.getParameter("cateItemId"));
-//		}
-//
-//		int page = 1;
-//		if (request.getParameter("page") != null) {
-//			page = Integer.parseInt(request.getParameter("page"));
-//		}
-		
+
 		int page = 1;
 
 		if (!Util.empty(request, "page") && Util.isNum(request, "page")) {
 			page = Util.getInt(request, "page");
 		}
-		
-		
+
 		int cateItemId = 0;
 
 		if (!Util.empty(request, "cateItemId") && Util.isNum(request, "cateItemId")) {
 			cateItemId = Util.getInt(request, "cateItemId");
 		}
+
+		String cateItemName = "전체";
+
+		if (cateItemId != 0) {
+			CateItem cateItem = articleService.getCateItem(cateItemId);
+			cateItemName = cateItem.getName();
+		}
+		request.setAttribute("cateItemName", cateItemName);
 
 		String searchKeywordType = "";
 
@@ -131,8 +131,8 @@ public class ArticleController extends Controller {
 		request.setAttribute("cateItemId", cateItemId);
 		request.setAttribute("page", page);
 
-		List<Article> articles = articleService.getForPrintListArticles(page, cateItemId, itemsInAPage, request,
-				response, searchKeywordType, searchKeyword);
+		List<Article> articles = articleService.getForPrintListArticles(page, itemsInAPage, cateItemId,
+				searchKeywordType, searchKeyword);
 		request.setAttribute("articles", articles);
 
 		// extra 추가후
