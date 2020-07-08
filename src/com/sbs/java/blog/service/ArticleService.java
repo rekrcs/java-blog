@@ -20,8 +20,8 @@ public class ArticleService extends Service {
 	}
 
 	public List<Article> getForPrintListArticles(int page, int cateItemId, int itemsInAPage, HttpServletRequest request,
-			HttpServletResponse response) {
-		return articleDao.getForPrintListArticles(page, cateItemId, itemsInAPage, request, response);
+			HttpServletResponse response, String searchKeywordType, String searchKeyword) {
+		return articleDao.getForPrintListArticles(page, cateItemId, itemsInAPage, request, response, searchKeywordType, searchKeyword);
 	}
 
 	public Article getForDetailFromArticle(int id, HttpServletRequest request, HttpServletResponse response) {
@@ -34,9 +34,9 @@ public class ArticleService extends Service {
 
 	}
 
-	public int getForPrintListArticlesCount(int cateItemId) {
+	public int getForPrintListArticlesCount(int cateItemId, String searchKeywordType, String searchKeyword) {
 
-		return articleDao.getForPrintListArticlesCount(cateItemId);
+		return articleDao.getForPrintListArticlesCount(cateItemId, searchKeywordType, searchKeyword);
 	}
 
 	public int getFirstIdFromArticle() {

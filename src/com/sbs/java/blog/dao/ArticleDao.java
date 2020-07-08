@@ -23,7 +23,7 @@ public class ArticleDao extends Dao {
 	}
 
 	public List<Article> getForPrintListArticles(int page, int cateItemId, int itemsInAPage, HttpServletRequest request,
-			HttpServletResponse response) {
+			HttpServletResponse response, String searchKeywordType, String searchKeyword) {
 		String sql = "";
 
 		int limitFrom = (page - 1) * itemsInAPage;
@@ -34,6 +34,11 @@ public class ArticleDao extends Dao {
 		if (cateItemId != 0) {
 			sql += String.format("AND cateItemId = %d ", cateItemId);
 		}
+		
+		if(searchKeywordType.equals("title") && searchKeyword.length() > 0) {
+			sql += String.format(" AND title LIKE CONCAT('%%', '%s', '%%') ", searchKeyword);
+		}
+		
 		sql += String.format("ORDER BY id DESC ");
 		sql += String.format("LIMIT %d, %d ", limitFrom, itemsInAPage);
 
@@ -77,7 +82,7 @@ public class ArticleDao extends Dao {
 
 	}
 
-	public int getForPrintListArticlesCount(int cateItemId) {
+	public int getForPrintListArticlesCount(int cateItemId, String searchKeywordType, String searchKeyword) {
 		String sql = "";
 
 		sql += String.format("SELECT COUNT(*)");
@@ -86,6 +91,11 @@ public class ArticleDao extends Dao {
 		if (cateItemId != 0) {
 			sql += String.format(" AND cateItemId = %d", cateItemId);
 		}
+		
+		if(searchKeywordType.equals("title") && searchKeyword.length() > 0) {
+			sql += String.format(" AND title LIKE CONCAT('%%', '%s', '%%') ", searchKeyword);
+		}
+		
 		int totalCount = dbUtil.selectRowIntValue(dbConnection, sql);
 
 		return totalCount;

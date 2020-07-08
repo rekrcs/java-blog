@@ -16,7 +16,7 @@ public class ArticleController extends Controller {
 	public ArticleController(Connection dbConnection, String actionMethodName, HttpServletRequest request,
 			HttpServletResponse response) {
 		super(dbConnection, actionMethodName, request, response);
-		
+
 	}
 
 	public void beforeAction() {
@@ -94,12 +94,34 @@ public class ArticleController extends Controller {
 		if (request.getParameter("page") != null) {
 			page = Integer.parseInt(request.getParameter("page"));
 		}
+//		int page = 1;
+//		
+//		if (!Util.empty(request, "page") && Util.isNum(request, "page")) {
+//			page = Util.getInt(request, "page");
+//		}
+//		
+//		int cateItemId = 0;
+//		
+//		if (!Util.empty(request, "cateItemId") && Util.isNum(request, "cateItemId")) {
+//			page = Util.getInt(request, "cateItemId");
+//		}
+
+	String searchKeywordType = "";
+		
+		if (!Util.empty(request, "searchKeywordType")) {
+			searchKeywordType = Util.getString(request, "searchKeywordType");
+		}
 		
 		String searchKeyword = "";
-		String searchKeyType = "";
+		
+		if (!Util.empty(request, "searchKeyword")) {
+			searchKeyword = Util.getString(request, "searchKeyword");
+		}
+		
+	
 		
 		int itemsInAPage = 5;
-		int totalCount = articleService.getForPrintListArticlesCount(cateItemId);
+		int totalCount = articleService.getForPrintListArticlesCount(cateItemId, searchKeywordType, searchKeyword);
 		int totalPage = (int) Math.ceil((double) totalCount / itemsInAPage);
 
 		request.setAttribute("totalPage", totalPage);
@@ -107,7 +129,7 @@ public class ArticleController extends Controller {
 		request.setAttribute("page", page);
 
 		List<Article> articles = articleService.getForPrintListArticles(page, cateItemId, itemsInAPage, request,
-				response);
+				response, searchKeywordType, searchKeyword);
 		request.setAttribute("articles", articles);
 
 		// extra 추가후
