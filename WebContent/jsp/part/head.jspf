@@ -315,6 +315,10 @@ footer>.list-footer {
 									class="block">GITHUB</a></li>
 								<li><a href="${pageContext.request.contextPath}/s/home/sns">INSTA</a></li>
 							</ul></li>
+						<li><a
+							href="${pageContext.request.contextPath}/s/member/join"
+							class="block height-100p" style="text-align: center;"><i
+								class="fas fa-user-plus"></i><br />Sign up</a></li>
 					</ul>
 				</nav>
 			</div>
@@ -355,6 +359,9 @@ footer>.list-footer {
 							class="block">GITHUB</a></li>
 						<li><a href="${pageContext.request.contextPath}/s/home/sns">INSTA</a></li>
 					</ul></li>
+				<li><a href="${pageContext.request.contextPath}/s/member/join"
+					class="block"><i class="fas fa-user-plus"></i> Sign up
+						<hr></hr></a></li>
 			</ul>
 		</nav>
 	</div>

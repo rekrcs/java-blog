@@ -40,7 +40,7 @@ public class App {
 	}
 
 	private String getDbUrl() {
-		return "jdbc:mysql://localhost:3306/blog?serverTimezone=Asia/Seoul&useOldAliasMetadataBehavior=true&zeroDateTimeBehavior=convertToNull";
+		return "jdbc:mysql://site33.iu.gy/site33?serverTimezone=Asia/Seoul&useOldAliasMetadataBehavior=true&zeroDateTimeBehavior=convertToNull";
 	}
 
 	public void start() throws ServletException, IOException {
@@ -122,11 +122,11 @@ public class App {
 	}
 
 	private String getDbId() {
-		return "root";
+		return "site33";
 	}
 
 	private String getDbPassword() {
-		return "";
+		return "sbs123414";
 	}
 
 }

@@ -61,3 +61,15 @@ title = 'sql 문법 정리',
 
 SELECT *
 FROM article;
+
+CREATE TABLE `member` (
+    id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    regDate DATETIME NOT NULL,
+    loginId CHAR(100) NOT NULL UNIQUE,
+    loginPw CHAR(100) NOT NULL,
+    `name` CHAR(100) NOT NULL,
+    nickname CHAR(100) NOT NULL UNIQUE
+);
+
+SELECT *
+FROM `member`;
