@@ -3,6 +3,7 @@ package com.sbs.java.blog.util;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
@@ -84,6 +85,44 @@ public class DBUtil {
 		}
 
 		return rows.get(0);
+	}
+
+	public static int insert(Connection dbConn, SecSql sql) {
+		int id = -1;
+
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+
+		try {
+			stmt = sql.getPreparedStatement(dbConn);
+			stmt.executeUpdate();
+			rs = stmt.getGeneratedKeys();
+
+			if (rs.next()) {
+				id = rs.getInt(1);
+			}
+
+		} catch (SQLException e) {
+			throw new SQLErrorException("SQL 예외, SQL : " + sql, e);
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					throw new SQLErrorException("SQL 예외, rs 닫기, SQL : " + sql, e);
+				}
+			}
+
+			if (stmt != null) {
+				try {
+					stmt.close();
+				} catch (SQLException e) {
+					throw new SQLErrorException("SQL 예외, stmt 닫기, SQL : " + sql, e);
+				}
+			}
+
+		}
+		return id;
 	}
 
 	public static int insert(Connection dbConn, String sql) {

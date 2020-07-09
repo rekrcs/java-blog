@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.sbs.java.blog.dto.Article;
 import com.sbs.java.blog.dto.CateItem;
 import com.sbs.java.blog.util.DBUtil;
+import com.sbs.java.blog.util.SecSql;
 
 public class ArticleDao extends Dao {
 	private Connection dbConnection;
@@ -226,16 +227,27 @@ public class ArticleDao extends Dao {
 	}
 
 	public int write(int cateItemId, String title, String body) {
-		String sql = "";
+		SecSql secSql = new SecSql();
 
-		sql += String.format("INSERT INTO article ");
-		sql += String.format("SET regDate = NOW() ");
-		sql += String.format(", updateDate = NOW() ");
-		sql += String.format(", title = '%s' ", title);
-		sql += String.format(", body = '%s' ", body);
-		sql += String.format(", displayStatus = '1' ");
-		sql += String.format(", cateItemId = '%d' ", cateItemId);
-
-		return DBUtil.insert(dbConnection, sql);
+		secSql.append("INSERT INTO article");
+		secSql.append("SET regDate = NOW()");
+		secSql.append(", updateDate = NOW()");
+		secSql.append(", title = ? ", title);
+		secSql.append(", body = ? ", body);
+		secSql.append(", displayStatus = '1'");
+		secSql.append(", cateItemId = ?", cateItemId);
+		
+		/*
+		 * String sql = "";
+		 * 
+		 * sql += String.format("INSERT INTO article "); sql +=
+		 * String.format("SET regDate = NOW() "); sql +=
+		 * String.format(", updateDate = NOW() "); sql +=
+		 * String.format(", title = '%s' ", title); sql +=
+		 * String.format(", body = '%s' ", body); sql +=
+		 * String.format(", displayStatus = '1' "); sql +=
+		 * String.format(", cateItemId = '%d' ", cateItemId);
+		 */
+		return DBUtil.insert(dbConnection, secSql);
 	}
 }
