@@ -36,6 +36,8 @@ public class MemberController extends Controller {
 		String nickName = request.getParameter("nickName");
 		String loginPw = request.getParameter("loginPw");
 		String loginPwConfirm = request.getParameter("loginPwConfirm");
+		String loginPwReal = request.getParameter("loginPwReal");
+		
 		
 		for(Member member : members) {
 			if(member.getLoginId().equals(loginId)) {
@@ -53,7 +55,7 @@ public class MemberController extends Controller {
 			return "html:<script> alert('비번과 비번 확인이 일치 하지 않습니다.'); location.replace('join'); </script>";
 
 		} else {
-			int id = memberService.join(loginId, name, nickName, loginPw);
+			int id = memberService.join(loginId, name, nickName, loginPwReal);
 			return "html:<script> alert('" + id + "번 회원님이 가입 했습니다.'); location.replace('join'); </script>";
 		}
 	}

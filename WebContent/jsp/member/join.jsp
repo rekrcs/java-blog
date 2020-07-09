@@ -46,8 +46,55 @@
 	border: 1px solid black;
 }
 </style>
+
+<!-- 비번 암호화저장 -->
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js"></script>
+
+<!-- 회원가입 중 유효하지 않은 input 방지  -->
+<script>
+	var joinFormSubmitted = false;
+
+	function submitJoinForm(form) {
+		if (joinFormSubmitted) {
+			alert('처리 중입니다.');
+			return;
+		}
+
+		form.loginId.value = form.loginId.value.trim();
+		if (form.loginId.value.length == 0) {
+			alert('아이디를 입력해주세요.');
+			form.loginId.focus();
+
+			return;
+		}
+
+		if (form.loginId.value.indexOf(' ') != -1) {
+			alert('아이디를 영문소문자와 숫자의 조합으로 입력해주세요.')
+			form.loginId.focus();
+
+			return;
+		}
+
+		form.loginPw.value = form.loginPw.value.trim();
+		if (form.loginPw.value.length == 0) {
+			alert('비밀번호를 입력해주세요.');
+			form.loginPw.focus();
+
+			return;
+		}
+
+		form.loginPwReal.value = sha256(form.loginPw.value);
+// 		form.loginPw.value = '';
+
+		form.submit();
+		joinFormSubmitted = true;
+	}
+</script>
 <div class="member-join-box con">
-	<form action="doJoin" method="post" class="join-form form1">
+	<form action="doJoin" method="post" class="join-form form1"
+		onsubmit="submitJoinForm(this); return false;">
+		<input type="hidden" name="loginPwReal">
 		<div class="form-row">
 			<div class="label">아이디</div>
 			<div class="input">
