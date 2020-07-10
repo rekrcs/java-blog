@@ -272,4 +272,52 @@ public class DBUtil {
 
 		return oneId;
 	}
+
+	public static int update(Connection dbConnection, SecSql sql) {
+		int id = -1;
+
+		PreparedStatement stmt = null;
+
+		try {
+			stmt = sql.getPreparedStatement(dbConnection);
+			id = stmt.executeUpdate();
+
+		} catch (SQLException e) {
+			throw new SQLErrorException("SQL 예외, SQL : " + sql, e);
+		} finally {
+			if (stmt != null) {
+				try {
+					stmt.close();
+				} catch (SQLException e) {
+					throw new SQLErrorException("SQL 예외, stmt 닫기, SQL : " + sql, e);
+				}
+			}
+
+		}
+		return id;
+	}
+
+	public static int delete(Connection dbConnection, SecSql sql) {
+		int id = -1;
+
+		PreparedStatement stmt = null;
+
+		try {
+			stmt = sql.getPreparedStatement(dbConnection);
+			id = stmt.executeUpdate();
+
+		} catch (SQLException e) {
+			throw new SQLErrorException("SQL 예외, SQL : " + sql, e);
+		} finally {
+			if (stmt != null) {
+				try {
+					stmt.close();
+				} catch (SQLException e) {
+					throw new SQLErrorException("SQL 예외, stmt 닫기, SQL : " + sql, e);
+				}
+			}
+
+		}
+		return id;
+	}
 }

@@ -34,9 +34,36 @@ public class ArticleController extends Controller {
 			return doActionDoWrite(request, response);
 		case "write":
 			return doActionWrite(request, response);
+		case "modify":
+			return doActionModify(request, response);
+		case "doModify":
+			return doActionDoModify(request, response);
+		case "delete":
+			return doActionDelete(request, response);
 		}
 		return "";
 
+	}
+
+	private String doActionDelete(HttpServletRequest request, HttpServletResponse response) {
+		int id = Integer.parseInt(request.getParameter("id"));
+		
+		int deleteId = articleService.delete(id);
+		return "html:<script> alert('" + id + "번 게시물이 삭제되었습니다.'); location.replace('list'); </script>";
+	}
+
+	private String doActionDoModify(HttpServletRequest request, HttpServletResponse response) {
+		String title = request.getParameter("title");
+		String body = request.getParameter("body");
+		int cateItemId = Util.getInt(request, "cateItemId");
+		int id = Integer.parseInt(request.getParameter("id"));
+		int modifyId = articleService.modify(id, cateItemId, title, body);
+
+		return "html:<script> alert('" + id + "번 게시물이 수정되었습니다.'); location.replace('list'); </script>";
+	}
+
+	private String doActionModify(HttpServletRequest request, HttpServletResponse response) {
+		return "article/modify.jsp";
 	}
 
 	private String doActionWrite(HttpServletRequest request, HttpServletResponse response) {

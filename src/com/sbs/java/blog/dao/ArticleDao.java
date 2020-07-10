@@ -373,4 +373,27 @@ public class ArticleDao extends Dao {
 
 		return DBUtil.insert(dbConnection, secSql);
 	}
+
+	public int modify(int cateItemId, int id, String title, String body) {
+		SecSql secSql = new SecSql();
+
+		secSql.append("UPDATE article");
+		secSql.append("SET updateDate = NOW()");
+		secSql.append(", title = ?", title);
+		secSql.append(", body = ?", body);
+		secSql.append(", displayStatus = '1'");
+		secSql.append(", cateItemId = ?", cateItemId);
+		secSql.append("WHERE id = ?", id);
+
+		return DBUtil.update(dbConnection, secSql);
+	}
+
+	public int delete(int id) {
+		SecSql secSql = new SecSql();
+
+		secSql.append("DELETE FROM article");
+		secSql.append("WHERE id = ?", id);
+
+		return DBUtil.delete(dbConnection, secSql);
+	}
 }

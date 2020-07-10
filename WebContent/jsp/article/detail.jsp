@@ -43,6 +43,19 @@
 	display: flex;
 	justify-content: space-between;
 }
+
+/* 수정 삭제 버튼 시작 */
+.option-box {
+	display:flex;
+	justify-content: flex-end;
+}
+
+.option-box > span:nth-child(2) {
+	margin:0 3px;
+}
+.option-box > span > a:hover {
+	border-bottom: 1px solid black;
+}
 </style>
 <div class="detail-body-container">
 	<header>
@@ -91,6 +104,9 @@
 			plugins : [ toastui.Editor.plugin.codeSyntaxHighlight, youtubePlugin, replPlugin, codepenPlugin ]
 		});
 	</script>
+	<div class="option-box">
+		<span class="option-modify"><a href="${pageContext.request.contextPath}/s/article/modify?id=${param.id}">수정</a></span><span></span><span class="option-delete"><a href="delete?id=${param.id}">삭제</a></span>
+	</div>
 	<div class="previous-next-box">
 		<%
 			if (article.getId() == firstId) {

@@ -73,4 +73,12 @@ public class ArticleService extends Service {
 		return articleDao.write(cateItemId, title, body);
 	}
 
+	public int modify(int cateItemId, int id, String title, String body) {
+		return articleDao.modify(id, cateItemId, title, body);
+	}
+
+	public int delete(int id) {
+		return articleDao.delete(id);
+	}
+
 }

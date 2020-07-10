@@ -4,6 +4,36 @@
 <%@ include file="/jsp/part/head.jspf"%>
 
 <!-- 글쓰는 중 유효하지 않은 input 방지  -->
+<script>
+	var writeFormSubmitted = false;
+
+	function submitWriteForm(form) {
+		if (writeFormSubmitted) {
+			alert('처리 중입니다.');
+			return;
+		}
+
+		form.title.value = form.title.value.trim();
+		if (form.title.value.length == 0) {
+			alert('제목을 입력해주세요.');
+			form.title.focus();
+
+			return;
+		}
+
+		form.body.value = form.body.value.trim();
+		if (form.body.value.length == 0) {
+			alert('내용을 입력해주세요.');
+			form.body.focus();
+
+			return;
+		}
+
+		form.submit();
+		writeFormSubmitted = true;
+	}
+</script>
+
 <style>
 /* lib */
 .form1 {
@@ -46,6 +76,7 @@
 		display: block;
 	}
 }
+
 /* cus */
 .write-form-box {
 	margin-top: 30px;
@@ -59,7 +90,7 @@
 
 
 <div class="write-form-box con">
-	<form action="doWrite" method="POST" class="write-form form1"
+	<form action="doModify?id=${param.id}" method="POST" class="write-form form1"
 		onsubmit="submitWriteForm(this); return false;">
 		<div class="form-row">
 			<div class="label">카테고리 선택</div>
@@ -96,12 +127,5 @@
 		</div>
 	</form>
 </div>
-<h1>에디터 1</h1>
 
-<form action="https://www.naver.com/" target="_blank"
-	onsubmit="submitWriteForm(this); return false;">
-	<input type="hidden" name="body">
-	<div id="editor1"></div>
-	<input type="submit" value="전송">
-</form>
 <%@ include file="/jsp/part/foot.jspf"%>
